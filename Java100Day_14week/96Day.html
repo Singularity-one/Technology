@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header id="95day" class="main">
+                                            <h1>Spring Boot 和JUnit4</h1>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="96_pomXml">pom.xml 配置</h2>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">dependency</span><span style="color:#ff8906; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#ff8906; ">&gt;</span>org.springframework.boot<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#fb8400; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#ff8906; ">&gt;</span>spring-boot-starter-test<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#fb8400; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">scope</span><span style="color:#ff8906; ">&gt;</span>test<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">scope</span><span style="color:#fb8400; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">exclusions</span><span style="color:#ff8906; ">&gt;</span>
+          <span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">exclusion</span><span style="color:#ff8906; ">&gt;</span>
+               <span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#ff8906; ">&gt;</span>org.junit.vintage<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#fb8400; ">&gt;</span>
+               <span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#ff8906; ">&gt;</span>junit-vintage-engine<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#fb8400; ">&gt;</span>
+          <span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">exclusion</span><span style="color:#fb8400; ">&gt;</span>
+        <span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">exclusions</span><span style="color:#fb8400; ">&gt;</span>
+<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">dependency</span><span style="color:#fb8400; ">&gt;</span>
+</pre>
+  
+                                        </div>
+
+                                        <p></p>
+    
+                                        <hr class="major" />
+    
+                                        <h2 id="96_MarkTest">建立測試</h2>
+                                        <p>專案(右鍵)>Run>Maven test</p>
+                                        <p></p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_fristTest.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2>專案結構 測試範例</h2>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_fristTest2.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_fristTest3.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2>因為打包下來的專案中pom.xml 裡面依賴就包含Junit, Mockito</h2>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">dependency</span><span style="color:#ff8906; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#ff8906; ">&gt;</span>org.springframework.boot<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">groupId</span><span style="color:#fb8400; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#ff8906; ">&gt;</span>spring-boot-starter-test<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">artifactId</span><span style="color:#fb8400; ">&gt;</span>
+	<span style="color:#ff8906; ">&lt;</span><span style="color:#f6c1d0; ">scope</span><span style="color:#ff8906; ">&gt;</span>test<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">scope</span><span style="color:#fb8400; ">&gt;</span>
+<span style="color:#fb8400; ">&lt;/</span><span style="color:#f6c1d0; ">dependency</span><span style="color:#fb8400; ">&gt;</span>
+</pre>
+                                        </div>
+
+
+                                        <hr class="major" />
+    
+                                        <h2 id="96_VendorServiceTest">在有起啟動H2 編寫測試範例</h2>
+                                        <h3>建立 VendorServiceTest.class</h3>
+
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_VendorServiceTest1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span> <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">;</span>
+
+    import <span style="color:#e66170; font-weight:bold; ">java</span><span style="color:#d2cd86; ">.</span>util<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">List</span><span style="color:#d2cd86; ">;</span>
+    
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span>Test<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span>runner<span style="color:#d2cd86; ">.</span>RunWith<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>beans<span style="color:#d2cd86; ">.</span>factory<span style="color:#d2cd86; ">.</span>annotation<span style="color:#d2cd86; ">.</span>Autowired<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>boot<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">context</span><span style="color:#d2cd86; ">.</span>SpringBootTest<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>boot<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span>mock<span style="color:#d2cd86; ">.</span>mockito<span style="color:#d2cd86; ">.</span>MockBean<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">context</span><span style="color:#d2cd86; ">.</span>junit4<span style="color:#d2cd86; ">.</span>SpringRunner<span style="color:#d2cd86; ">;</span>
+    
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>entity<span style="color:#d2cd86; ">.</span>Vendor<span style="color:#d2cd86; ">;</span>
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>respository<span style="color:#d2cd86; ">.</span>VendorRespository<span style="color:#d2cd86; ">;</span>
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>service<span style="color:#d2cd86; ">.</span>VendorService<span style="color:#d2cd86; ">;</span>
+    
+    @RunWith<span style="color:#d2cd86; ">(</span>SpringRunner<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">class</span><span style="color:#d2cd86; ">)</span>
+    @SpringBootTest
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> VendorServiceTest <span style="color:#d2cd86; ">{</span>
+        @Autowired
+        <span style="color:#e66170; font-weight:bold; ">private</span> VendorService vendorService<span style="color:#d2cd86; ">;</span>
+    
+        @Test
+        <span style="color:#e66170; font-weight:bold; ">public</span> void findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> throws <span style="color:#e66170; font-weight:bold; ">Exception</span> <span style="color:#d2cd86; ">{</span>
+            <span style="color:#9999a9; ">//vendorService，裡面會再去call VendorRespository取DB的data</span>
+            <span style="color:#e66170; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> vendorService<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#02d045; ">"Tom"</span><span style="color:#d2cd86; ">,</span><span style="color:#02d045; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+    
+    
+            <span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertNotNull<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">get</span><span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getId<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#02d045; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">get</span><span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getTel<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#02d045; ">"0945123456"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+        <span style="color:#d2cd86; ">}</span>
+    <span style="color:#d2cd86; ">}</span>
+    </pre>
+    
+                                        </div>
+
+                                        <p>@RunWith(SpringRunner.class) </p>
+                                        <p>@SpringBootTest SpringBoot的測試</p>
+                                        <p>@Autowired 是Spring 2.5以後的註解,可以對class中 變量, 方法, 構造函數進行標註使其自動裝配</p>
+
+                                        <h3>執行測試</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_VendorServiceTest2.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <h3>結果</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_VendorServiceTest3.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="96_Mockito">關閉H2 使用 Mockito</h2>
+                                        
+                                        <h3>加上 @MockBean和相對應的方法</h3>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#b060b0; ">;</span>
+
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">ArrayList</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">List</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Assert</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Test</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">runner</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">RunWith</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mockito</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Mockito</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">beans</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">factory</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">annotation</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Autowired</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringBootTest</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mock</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mockito</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MockBean</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit4</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringRunner</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">entity</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Vendor</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">respository</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorRespository</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">service</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorService</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#8695b8; font-weight:bold; ">@RunWith(SpringRunner.class)</span>
+    <span style="color:#8695b8; font-weight:bold; ">@SpringBootTest</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> VendorServiceTest <span style="color:#b060b0; ">{</span>
+        <span style="color:#8695b8; font-weight:bold; ">@Autowired</span>
+        <span style="color:#e66170; font-weight:bold; ">private</span> VendorService vendorService<span style="color:#b060b0; ">;</span>
+        
+        <span style="color:#8695b8; font-weight:bold; ">@MockBean</span>
+        <span style="color:#e66170; font-weight:bold; ">private</span> VendorRespository vendorRespository<span style="color:#b060b0; ">;</span>
+    
+    
+        <span style="color:#8695b8; font-weight:bold; ">@Test</span>
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#e66170; font-weight:bold; ">throws</span> <span style="color:#bb7977; font-weight:bold; ">Exception</span> <span style="color:#b060b0; ">{</span>
+        <span style="color:#9999a9; ">//mock vendorRespository的findBySQL()方法</span>
+        <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">ArrayList</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Vendor vendor <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> Vendor<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        vendor<span style="color:#d2cd86; ">.</span>setId<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        vendor<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        vendor<span style="color:#d2cd86; ">.</span>setAddr<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        vendor<span style="color:#d2cd86; ">.</span>setTel<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"0945123456"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        dataList<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>vendor<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Mockito<span style="color:#d2cd86; ">.</span>when<span style="color:#d2cd86; ">(</span>vendorRespository<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>thenReturn<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+            
+        <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> OutputDataList <span style="color:#d2cd86; ">=</span> vendorService<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+          
+        Assert<span style="color:#d2cd86; ">.</span>assertNotNull<span style="color:#d2cd86; ">(</span>OutputDataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Assert<span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>OutputDataList<span style="color:#d2cd86; ">.</span>get<span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getId<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#00c4c4; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Assert<span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>OutputDataList<span style="color:#d2cd86; ">.</span>get<span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getTel<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#00c4c4; ">"0945123456"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+          
+      <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+
+                                        <h3>結果</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/Mockito1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2 id="96_VendorControllerTest">編寫VendorController測試 Get/Post 方法 範例</h2>
+                                        <h3>建立 抽象 AbstractTestr.class</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_AbstractTestr.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#b060b0; ">;</span>
+
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">io</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">IOException</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">runner</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">RunWith</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">beans</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">factory</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">annotation</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Autowired</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">json</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">JsonParseException</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringBootTest</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit4</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringRunner</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MockMvc</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">setup</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MockMvcBuilders</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">WebApplicationContext</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">fasterxml</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">jackson</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">core</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">JsonProcessingException</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">fasterxml</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">jackson</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">databind</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">JsonMappingException</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">fasterxml</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">jackson</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">databind</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">ObjectMapper</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#8695b8; font-weight:bold; ">@RunWith(SpringRunner.class)</span>
+    <span style="color:#8695b8; font-weight:bold; ">@SpringBootTest</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#e66170; font-weight:bold; ">class</span> AbstractTest <span style="color:#b060b0; ">{</span>
+          <span style="color:#e66170; font-weight:bold; ">protected</span> MockMvc mvc<span style="color:#b060b0; ">;</span>
+           <span style="color:#8695b8; font-weight:bold; ">@Autowired</span>
+           WebApplicationContext webApplicationContext<span style="color:#b060b0; ">;</span>
+    
+           <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#bb7977; ">void</span> setUp<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              mvc <span style="color:#d2cd86; ">=</span> MockMvcBuilders<span style="color:#d2cd86; ">.</span>webAppContextSetup<span style="color:#d2cd86; ">(</span>webApplicationContext<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>build<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+           <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#bb7977; font-weight:bold; ">String</span> mapToJson<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Object</span> obj<span style="color:#d2cd86; ">)</span> <span style="color:#e66170; font-weight:bold; ">throws</span> JsonProcessingException <span style="color:#b060b0; ">{</span>
+              ObjectMapper objectMapper <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> ObjectMapper<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">return</span> objectMapper<span style="color:#d2cd86; ">.</span>writeValueAsString<span style="color:#d2cd86; ">(</span>obj<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+           <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#d2cd86; ">&lt;</span>T<span style="color:#d2cd86; ">&gt;</span> T mapFromJson<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> json<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">Class</span><span style="color:#d2cd86; ">&lt;</span>T<span style="color:#d2cd86; ">&gt;</span> clazz<span style="color:#d2cd86; ">)</span>
+              <span style="color:#e66170; font-weight:bold; ">throws</span> JsonParseException<span style="color:#d2cd86; ">,</span> JsonMappingException<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">IOException</span> <span style="color:#b060b0; ">{</span>
+              
+              ObjectMapper objectMapper <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> ObjectMapper<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">return</span> objectMapper<span style="color:#d2cd86; ">.</span>readValue<span style="color:#d2cd86; ">(</span>json<span style="color:#d2cd86; ">,</span> clazz<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+
+                                        <h3>建立 VendorController.class</h3>
+
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_VendorControllerTest1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span> <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">;</span>
+
+    import <span style="color:#e66170; font-weight:bold; ">static</span> org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">;</span>
+    
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">Before</span><span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span>Test<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>junit<span style="color:#d2cd86; ">.</span>runner<span style="color:#d2cd86; ">.</span>RunWith<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>boot<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">context</span><span style="color:#d2cd86; ">.</span>SpringBootTest<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>http<span style="color:#d2cd86; ">.</span>MediaType<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">context</span><span style="color:#d2cd86; ">.</span>junit4<span style="color:#d2cd86; ">.</span>SpringRunner<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span>web<span style="color:#d2cd86; ">.</span>servlet<span style="color:#d2cd86; ">.</span>MvcResult<span style="color:#d2cd86; ">;</span>
+    import org<span style="color:#d2cd86; ">.</span>springframework<span style="color:#d2cd86; ">.</span>test<span style="color:#d2cd86; ">.</span>web<span style="color:#d2cd86; ">.</span>servlet<span style="color:#d2cd86; ">.</span>request<span style="color:#d2cd86; ">.</span>MockMvcRequestBuilders<span style="color:#d2cd86; ">;</span>
+    
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>dto<span style="color:#d2cd86; ">.</span>CommonHeader<span style="color:#d2cd86; ">;</span>
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>dto<span style="color:#d2cd86; ">.</span>VendorRequest<span style="color:#d2cd86; ">;</span>
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>dto<span style="color:#d2cd86; ">.</span>VendorRequestBody<span style="color:#d2cd86; ">;</span>
+    import <span style="color:#e66170; font-weight:bold; ">com</span><span style="color:#d2cd86; ">.</span>example<span style="color:#d2cd86; ">.</span>demo<span style="color:#d2cd86; ">.</span>dto<span style="color:#d2cd86; ">.</span>VendorResponse<span style="color:#d2cd86; ">;</span>
+    
+    @RunWith<span style="color:#d2cd86; ">(</span>SpringRunner<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">class</span><span style="color:#d2cd86; ">)</span>
+    @SpringBootTest
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> VendorControllerTest <span style="color:#e66170; font-weight:bold; ">extends</span> AbstractTest<span style="color:#d2cd86; ">{</span>
+        
+           @Override
+           @Before
+           <span style="color:#e66170; font-weight:bold; ">public</span> void setUp<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">{</span>
+              super<span style="color:#d2cd86; ">.</span>setUp<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+           <span style="color:#d2cd86; ">}</span>
+           
+           @Test
+           <span style="color:#e66170; font-weight:bold; ">public</span> void findAllTest<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> throws <span style="color:#e66170; font-weight:bold; ">Exception</span> <span style="color:#d2cd86; ">{</span>
+              String uri <span style="color:#d2cd86; ">=</span> <span style="color:#02d045; ">"/vendor/findAll"</span><span style="color:#d2cd86; ">;</span>
+              MvcResult mvcResult <span style="color:#d2cd86; ">=</span> mvc<span style="color:#d2cd86; ">.</span>perform<span style="color:#d2cd86; ">(</span>MockMvcRequestBuilders<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">get</span><span style="color:#d2cd86; ">(</span>uri<span style="color:#d2cd86; ">)</span>
+                 <span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">accept</span><span style="color:#d2cd86; ">(</span>MediaType<span style="color:#d2cd86; ">.</span>APPLICATION_JSON_VALUE<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>andReturn<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              <span style="color:#e66170; font-weight:bold; ">int</span> status <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getStatus<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              assertEquals<span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">200</span><span style="color:#d2cd86; ">,</span> status<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              String content <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getContentAsString<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              <span style="color:#e66170; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">out</span><span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              VendorResponse datalist <span style="color:#d2cd86; ">=</span> super<span style="color:#d2cd86; ">.</span>mapFromJson<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">,</span> VendorResponse<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">class</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>datalist<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getDataList<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">get</span><span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getId<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#02d045; ">"1"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+           <span style="color:#d2cd86; ">}</span>
+           
+           @Test
+           <span style="color:#e66170; font-weight:bold; ">public</span> void findBySQLTest<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> throws <span style="color:#e66170; font-weight:bold; ">Exception</span> <span style="color:#d2cd86; ">{</span>
+              String uri <span style="color:#d2cd86; ">=</span> <span style="color:#02d045; ">"/vendor/findBySQL"</span><span style="color:#d2cd86; ">;</span>
+              VendorRequest vendorRequest <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> VendorRequest<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              VendorRequestBody vendorRequestBody <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> VendorRequestBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              CommonHeader CommonHeader <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> CommonHeader<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              vendorRequestBody<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span><span style="color:#02d045; ">"Tom"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              vendorRequestBody<span style="color:#d2cd86; ">.</span>setAddr<span style="color:#d2cd86; ">(</span><span style="color:#02d045; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              vendorRequest<span style="color:#d2cd86; ">.</span>setHeader<span style="color:#d2cd86; ">(</span>CommonHeader<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span><span style="color:#d2cd86; ">;</span>
+              vendorRequest<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>vendorRequestBody<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+    
+              String inputJson <span style="color:#d2cd86; ">=</span> super<span style="color:#d2cd86; ">.</span>mapToJson<span style="color:#d2cd86; ">(</span>vendorRequest<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">out</span><span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>inputJson<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              MvcResult mvcResult <span style="color:#d2cd86; ">=</span> mvc<span style="color:#d2cd86; ">.</span>perform<span style="color:#d2cd86; ">(</span>MockMvcRequestBuilders<span style="color:#d2cd86; ">.</span>post<span style="color:#d2cd86; ">(</span>uri<span style="color:#d2cd86; ">)</span>
+                 <span style="color:#d2cd86; ">.</span>contentType<span style="color:#d2cd86; ">(</span>MediaType<span style="color:#d2cd86; ">.</span>APPLICATION_JSON_VALUE<span style="color:#d2cd86; ">)</span>
+                 <span style="color:#d2cd86; ">.</span>content<span style="color:#d2cd86; ">(</span>inputJson<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>andReturn<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              <span style="color:#e66170; font-weight:bold; ">int</span> status <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getStatus<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              String content <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getContentAsString<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">out</span><span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              
+              VendorResponse datalist <span style="color:#d2cd86; ">=</span> super<span style="color:#d2cd86; ">.</span>mapFromJson<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">,</span> VendorResponse<span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">class</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">Assert</span><span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>datalist<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getDataList<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">get</span><span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getId<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#02d045; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">;</span>
+           <span style="color:#d2cd86; ">}</span>
+    <span style="color:#d2cd86; ">}</span>
+    </pre>    
+                                        </div>
+
+                                        <h3>測試 Get 方法 findAll() 和 Post 方法 findBySQL() , H2 資料庫必須啟動</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_Get_Post_Test.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2 id="96_MockitoVendorControllerTest">測試 Mockito 和 Post 方法 findBySQL() , H2 資料庫關閉</h2>
+                                        <h3>加入 Mockito 範例展示</h3>
+
+                                        <div>
+                                           
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#b060b0; ">;</span>
+
+
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">ArrayList</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">List</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Assert</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Before</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Test</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">runner</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">RunWith</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mockito</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Mockito</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringBootTest</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mock</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">mockito</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MockBean</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">http</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MediaType</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">context</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">junit4</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringRunner</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MvcResult</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">test</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">request</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">MockMvcRequestBuilders</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">dto</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">CommonHeader</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">dto</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorRequest</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">dto</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorRequestBody</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">dto</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorResponse</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">entity</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">Vendor</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">service</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">VendorService</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#8695b8; font-weight:bold; ">@RunWith(SpringRunner.class)</span>
+    <span style="color:#8695b8; font-weight:bold; ">@SpringBootTest</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> VendorControllerTest <span style="color:#e66170; font-weight:bold; ">extends</span> AbstractTest<span style="color:#b060b0; ">{</span>
+        
+           <span style="color:#8695b8; font-weight:bold; ">@MockBean</span>
+           <span style="color:#e66170; font-weight:bold; ">private</span> VendorService vendorService<span style="color:#b060b0; ">;</span>
+        
+           <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+           <span style="color:#8695b8; font-weight:bold; ">@Before</span>
+           <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setUp<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              <span style="color:#e66170; font-weight:bold; ">super</span><span style="color:#d2cd86; ">.</span>setUp<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+           
+           <span style="color:#8695b8; font-weight:bold; ">@Test</span>
+           <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> findBySQLTest<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#e66170; font-weight:bold; ">throws</span> <span style="color:#bb7977; font-weight:bold; ">Exception</span> <span style="color:#b060b0; ">{</span>
+              <span style="color:#bb7977; font-weight:bold; ">String</span> uri <span style="color:#d2cd86; ">=</span> <span style="color:#00c4c4; ">"/vendor/findBySQL"</span><span style="color:#b060b0; ">;</span>
+              VendorRequest vendorRequest <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> VendorRequest<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              VendorRequestBody vendorRequestBody <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> VendorRequestBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              CommonHeader CommonHeader <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> CommonHeader<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              vendorRequestBody<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              vendorRequestBody<span style="color:#d2cd86; ">.</span>setAddr<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              vendorRequest<span style="color:#d2cd86; ">.</span>setHeader<span style="color:#d2cd86; ">(</span>CommonHeader<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span><span style="color:#b060b0; ">;</span>
+              vendorRequest<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>vendorRequestBody<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">ArrayList</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                Vendor vendor <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> Vendor<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                vendor<span style="color:#d2cd86; ">.</span>setId<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                vendor<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                vendor<span style="color:#d2cd86; ">.</span>setAddr<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                vendor<span style="color:#d2cd86; ">.</span>setTel<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"0945123456"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                dataList<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>vendor<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              Mockito<span style="color:#d2cd86; ">.</span>when<span style="color:#d2cd86; ">(</span>vendorService<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Tom"</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"USA"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>thenReturn<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              <span style="color:#bb7977; font-weight:bold; ">String</span> inputJson <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">super</span><span style="color:#d2cd86; ">.</span>mapToJson<span style="color:#d2cd86; ">(</span>vendorRequest<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>inputJson<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              MvcResult mvcResult <span style="color:#d2cd86; ">=</span> mvc<span style="color:#d2cd86; ">.</span>perform<span style="color:#d2cd86; ">(</span>MockMvcRequestBuilders<span style="color:#d2cd86; ">.</span>post<span style="color:#d2cd86; ">(</span>uri<span style="color:#d2cd86; ">)</span>
+                 <span style="color:#d2cd86; ">.</span>contentType<span style="color:#d2cd86; ">(</span>MediaType<span style="color:#d2cd86; ">.</span>APPLICATION_JSON_VALUE<span style="color:#d2cd86; ">)</span>
+                 <span style="color:#d2cd86; ">.</span>content<span style="color:#d2cd86; ">(</span>inputJson<span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>andReturn<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              <span style="color:#bb7977; ">int</span> status <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getStatus<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#bb7977; font-weight:bold; ">String</span> content <span style="color:#d2cd86; ">=</span> mvcResult<span style="color:#d2cd86; ">.</span>getResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getContentAsString<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              VendorResponse datalist <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">super</span><span style="color:#d2cd86; ">.</span>mapFromJson<span style="color:#d2cd86; ">(</span>content<span style="color:#d2cd86; ">,</span> VendorResponse<span style="color:#d2cd86; ">.</span>class<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              Assert<span style="color:#d2cd86; ">.</span>assertEquals<span style="color:#d2cd86; ">(</span>datalist<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getDataList<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>get<span style="color:#d2cd86; ">(</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getId<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> <span style="color:#00c4c4; ">"2"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>                               
+                                        </div>
+
+                                        <h3>結果</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_Mockito_Post_Test.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/96_Mockito_Post_Test2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+										<ul class="contact">
+											<li class="icon brands fa-github"><a  href=" https://github.com/Singularity-one/14week_SpringBoot/tree/main">範例</a></li>
+										</ul>
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Java 100天</span>
+									<ul>
+                                        <li><a href="14Week.html">第十四週 Spring Boot</a></li>
+                                        <ul>
+                                            <li><a href="#95day">第96天 Spring Boot 和JUnit</a></li>
+                                            <li><a href="#96_pomXml">pom.xml 配置</a></li>
+                                            <li><a href="#96_MarkTest">建立測試</a></li>
+                                            <li><a href="#96_VendorServiceTest">在有起啟動H2 編寫測試範例</a></li>
+                                            <li><a href="#96_Mockito">關閉H2 使用 Mockito</a></li>
+                                            <li><a href="#96_VendorControllerTest">編寫VendorController測試 Get/Post 方法 範例</a></li>
+                                            <li><a href="#96_MockitoVendorControllerTest">測試 Mockito 和 Post 方法 findBySQL() , H2 資料庫關閉</a></li>
+                                        </ul>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

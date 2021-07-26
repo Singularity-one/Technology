@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header class="main">
+                                            <h1>Spring Boot 核心</h1>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <hr class="major" />
+    
+                                        <h2>基本配置</h2>
+                                        <p>@SpringBootApplication</p>
+                                        <p></p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92start_spring_io.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2>Spring Boot 快速搭建</h2>
+                                        <h3>(1) http://start.spring.io</h3>
+
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92start_spring_io.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <p>Project 可以選擇適用Maven 或Gradle 建置</p>
+                                        <p>Spring Boot 的版本</p>
+                                        <p>Packaging 種類</p>
+                                        <p>java 的版本 Spring Boot 最低要求為1.6 和Spring 框架4.x 最低要求一樣</p>
+                                        <p>ADD DEPENDENCIES... 可以輸入關鍵字來加入需要的元件</p>
+
+                                        <hr class="major" />
+    
+                                        <h2>IDE 開啟</h2>
+                                        
+                                        <h3>1</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92demo.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <p>下載後會是壓縮檔，打開後可以放入IDE的工作資料夾內待引用</p>
+
+                                        <h3>2</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92eclipseImport1.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <p>打開IDE(eclipse) Import</p>
+
+                                        <h3>3</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92eclipseImport2.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <p>選擇檔案位置</p>
+
+                                        <h3>4</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92demoProject.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <p>專案結構</p>
+
+                                        <hr class="major" />
+    
+                                        <h2>Spring Boot Hello World</h2>
+                                        <h3>1</h3>
+                                        <p>在DemoApplication.class 中編寫代碼</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92demoHelloWorld.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        <div>
+                                            
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">package</span><span style="color:#008073; "> com</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">example</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">demo</span><span style="color:#b060b0; ">;</span>
+
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringApplication</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">boot</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">autoconfigure</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">SpringBootApplication</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">bind</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">annotation</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">RequestMapping</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> org</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">springframework</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">web</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">bind</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">annotation</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">RestController</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#8695b8; font-weight:bold; ">@RestController</span>
+    <span style="color:#8695b8; font-weight:bold; ">@SpringBootApplication</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> DemoApplication <span style="color:#b060b0; ">{</span>
+        
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">static</span> <span style="color:#bb7977; ">void</span> main<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">[</span><span style="color:#d2cd86; ">]</span> args<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            SpringApplication<span style="color:#d2cd86; ">.</span>run<span style="color:#d2cd86; ">(</span>DemoApplication<span style="color:#d2cd86; ">.</span>class<span style="color:#d2cd86; ">,</span> args<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>
+        
+        <span style="color:#8695b8; font-weight:bold; ">@RequestMapping("/")</span>
+        <span style="color:#bb7977; font-weight:bold; ">String</span> index<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            <span style="color:#e66170; font-weight:bold; ">return</span> <span style="color:#00c4c4; ">"Hello Spring Boot"</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>
+    
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+
+                                        <h3>2</h3>
+                                        <p>如果需要改port 可以在application.properties 設定</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92application.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h3>3</h3>
+                                        <p>點選 Java Application 或 Spring Boot App 運行項目</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92Java_Application.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h3>4</h3>
+                                        <p>開啟網頁前往http://localhost:8081/</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/92_8081.JPG" alt="" />
+                                            </span>
+                                        </div>
+
+
+
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Java 100天</span>
+									<ul>
+                                        <li><a href="14Week.html">第十四週 Spring Boot</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
