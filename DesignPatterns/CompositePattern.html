@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                                <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                            <header class="main">
+                                <h1>合成模式</h1>
+                                <h2>Composite Pattern</h2>
+                            </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <p>讓某個物件具有一個替身，藉以控制外界對此物件的接觸</p>
+    
+                                        <hr class="major" />
+    
+                                        <h2>UML概念</h2>
+                                        
+                                        <span class="image object">
+                                            <img src="images/CompositePatternUML.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>實作</h2>
+                                        
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">ArrayList</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">util</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">List</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> CompositePattern <span style="color:#b060b0; ">{</span>
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">static</span> <span style="color:#bb7977; ">void</span> main<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">[</span><span style="color:#d2cd86; ">]</span> args<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              Employee CEO <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Boss"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">100</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"製造�"</span>王城<span style="color:#00c4c4; ">")</span><span style="color:#ffffff; background:#dd0000; ">;</span>
+    
+              Employee headSales <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Demon"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">90</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"�軍"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              Employee headMarketing <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Necromancer"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">90</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"策略"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              Employee clerk1 <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Witch"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">80</span><span style="color:#d2cd86; ">,</span> <span style="color:#00c4c4; ">"爆破"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              Employee clerk2 <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Slime"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">70</span><span style="color:#d2cd86; ">,</span> <span style="color:#00c4c4; ">"腐蝕"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              Employee salesExecutive1 <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Orc"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">80</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"護衛"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              Employee salesExecutive2 <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Goblin"</span><span style="color:#d2cd86; ">,</span><span style="color:#008c00; ">70</span><span style="color:#d2cd86; ">,</span><span style="color:#00c4c4; ">"偵查"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              CEO<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>headSales<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              CEO<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>headMarketing<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              headSales<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>salesExecutive1<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              headSales<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>salesExecutive2<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              headMarketing<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>clerk1<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              headMarketing<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>clerk2<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    
+              <span style="color:#9999a9; ">//print all employees of the organization</span>
+              <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>CEO<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span> 
+              <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"-------------------"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              
+              <span style="color:#e66170; font-weight:bold; ">for</span> <span style="color:#d2cd86; ">(</span>Employee headEmployee <span style="color:#d2cd86; ">:</span> CEO<span style="color:#d2cd86; ">.</span>getSubordinates<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                 <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>headEmployee<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                 <span style="color:#e66170; font-weight:bold; ">for</span> <span style="color:#d2cd86; ">(</span>Employee employee <span style="color:#d2cd86; ">:</span> headEmployee<span style="color:#d2cd86; ">.</span>getSubordinates<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                    <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>employee<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                 <span style="color:#b060b0; ">}</span>
+                 <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"-------------------"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+              <span style="color:#b060b0; ">}</span>		
+        <span style="color:#ffffff; background:#dd0000; ">}</span>
+    <span style="color:#ffffff; background:#dd0000; ">}</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">class</span> Employee <span style="color:#b060b0; ">{</span>
+        <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#b060b0; ">;</span>
+           <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; ">int</span> lv<span style="color:#b060b0; ">;</span>
+           <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> ability<span style="color:#b060b0; ">;</span>
+           <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Employee<span style="color:#d2cd86; ">&gt;</span> subordinates<span style="color:#b060b0; ">;</span>
+    
+           <span style="color:#e66170; font-weight:bold; ">public</span> Employee<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#d2cd86; ">,</span><span style="color:#bb7977; ">int</span> lv<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">String</span> ability<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>name <span style="color:#d2cd86; ">=</span> name<span style="color:#b060b0; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>lv <span style="color:#d2cd86; ">=</span> lv<span style="color:#b060b0; ">;</span>
+              <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>ability <span style="color:#d2cd86; ">=</span> ability<span style="color:#b060b0; ">;</span>
+              subordinates <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">ArrayList</span><span style="color:#d2cd86; ">&lt;</span>Employee<span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    
+           <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> add<span style="color:#d2cd86; ">(</span>Employee e<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              subordinates<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>e<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    
+           <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> remove<span style="color:#d2cd86; ">(</span>Employee e<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+              subordinates<span style="color:#d2cd86; ">.</span>remove<span style="color:#d2cd86; ">(</span>e<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    
+           <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Employee<span style="color:#d2cd86; ">&gt;</span> getSubordinates<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+             <span style="color:#e66170; font-weight:bold; ">return</span> subordinates<span style="color:#b060b0; ">;</span>
+           <span style="color:#b060b0; ">}</span>
+    
+        <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">String</span> toString<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            <span style="color:#e66170; font-weight:bold; ">return</span> <span style="color:#00c4c4; ">"Employee [name="</span> <span style="color:#d2cd86; ">+</span> name <span style="color:#d2cd86; ">+</span> <span style="color:#00c4c4; ">", lv="</span> <span style="color:#d2cd86; ">+</span> lv <span style="color:#d2cd86; ">+</span> <span style="color:#00c4c4; ">", ability="</span> <span style="color:#d2cd86; ">+</span> ability<span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">"]"</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>  
+    <span style="color:#b060b0; ">}</span>
+    </pre>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2>輸出</h2>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/CompositePattern2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2>Java上實際應用舉例：Model-View-Controller MVC 設計模式</h2>
+
+                                        <h2>概念</h2>
+    
+                                        <span class="image object">
+                                            <img src="images/CompositePatternMVC.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>相關</h2>
+                                        <a href="CompoundPattern.html">複合模式(Compound Pattern) 舉例:MVC 設計模式</a><br>
+
+                                        <hr class="major" />
+    
+										<ul class="contact">
+											<li class="icon brands fa-github" ><a href="https://github.com/Singularity-one/DesignPatterns/blob/aca9e0c6d4ae5a188ade617a852480a2064cac4a/src/CompositePattern.java">範例</a></li>
+										</ul>
+    
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">設計模式  DESIGN PATTERNS</span>
+									<ul>
+										<li><a href="StrategyPattern.html">策略模式(Strategy Pattern)</a></li>
+										<li><a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a></li>
+										<li><a href="DecoratorPattern.html">裝飾者模式(Decorator Pattern)</a></li>
+										<li><a href="Factory&AbstractFactoryPattern.html">工廠和抽象工廠模式(Factory & Abstract Factory Pattern)</a></li>
+										<li><a href="SingletonPattern.html">單例模式(Singleton Pattern)</a></li>
+										<li><a href="CommandPattern.html">命令模式(Command Pattern)</a></li>
+										<li><a href="AdapterPattern.html">轉接器模式(Adapter Pattern)</a></li>
+										<li><a href="FacadePattern.html">表象模式(Facade Pattern)</a></li>
+										<li><a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a></li>
+										<li><a href="IteratorPattern.html">反覆器模式(Iterator Pattern)</a></li>
+										<li><a href="CompositePattern.html">合成模式(Composite Pattern)</a></li>
+										<li><a href="StatePattern.html">狀態模式(State Pattern)</a></li>
+										<li><a href="ProxyPattern.html">代理人模式(Proxy Pattern)</a></li>
+										<li><a href="CompoundPattern.html">複合模式(Compound Pattern)</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+
+					<!-- Section -->
+						<section>
+							<!-- <header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+								Nashville, TN 00000-0000</li>
+							</ul> -->
+						</section>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                                <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header class="main">
+                                            <h1>裝飾者模式</h1>
+											<h2>Decorator Pattern</h2>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <p>動態地將責任附加於物件上，若要擴充功能裝飾者模式提供比繼承更有彈性的選擇</p>
+    
+                                        <hr class="major" />
+    
+                                        <h2>概念</h2>
+                                        
+                                        <span class="image object">
+                                            <img src="images/DecoratorPattern1.jpg" alt="" />
+                                        </span>
+
+										<h2>UML概念</h2>
+                                    
+                                        <span class="image object">
+                                            <img src="images/DecoratorPatternUML.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>實作裝飾者者模式</h2>
+                                        <p>實作</p>
+                                        
+                                        <div>
+                                            
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> DecoratorPattern <span style="color:#b060b0; ">{</span>
+	<span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">static</span> <span style="color:#bb7977; ">void</span> main<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">[</span><span style="color:#d2cd86; ">]</span> args<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		Word word <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> Fire<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		word <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> BallSpell<span style="color:#d2cd86; ">(</span>word<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		word <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> ThrowSpell<span style="color:#d2cd86; ">(</span>word<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		<span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>word<span style="color:#d2cd86; ">.</span>getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">",傷害："</span><span style="color:#d2cd86; ">+</span>word<span style="color:#d2cd86; ">.</span>damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		
+		Word word2 <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> Explosion<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		word2 <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> BallSpell<span style="color:#d2cd86; ">(</span>word2<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		word2 <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> IncreaseSpell<span style="color:#d2cd86; ">(</span>word2<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		word2 <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> ThrowSpell<span style="color:#d2cd86; ">(</span>word2<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		<span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span>word2<span style="color:#d2cd86; ">.</span>getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">",傷害："</span><span style="color:#d2cd86; ">+</span>word2<span style="color:#d2cd86; ">.</span>damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#e66170; font-weight:bold; ">class</span> Word<span style="color:#b060b0; ">{</span>  <span style="color:#9999a9; ">//文字一個抽象類別</span>
+	<span style="color:#bb7977; font-weight:bold; ">String</span> description<span style="color:#d2cd86; ">=</span><span style="color:#00c4c4; ">"Unknown Word!"</span><span style="color:#b060b0; ">;</span>
+	
+	<span style="color:#bb7977; font-weight:bold; ">String</span> getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> description<span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+
+	<span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#e66170; font-weight:bold; ">class</span> Spell <span style="color:#e66170; font-weight:bold; ">extends</span> Word<span style="color:#b060b0; ">{</span>  <span style="color:#9999a9; ">//咒語是一個抽象類別，也就是裝飾者類別</span>
+
+	<span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#bb7977; font-weight:bold; ">String</span> getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">class</span> Fire <span style="color:#e66170; font-weight:bold; ">extends</span> Word<span style="color:#b060b0; ">{</span>  <span style="color:#9999a9; ">//火焰咒語，注意基本傷害100之後再裝飾者模式修飾</span>
+	
+	Fire<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+		description<span style="color:#d2cd86; ">=</span><span style="color:#00c4c4; ">"Fire!"</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> <span style="color:#009f00; ">100.0</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">class</span> Explosion <span style="color:#e66170; font-weight:bold; ">extends</span> Word<span style="color:#b060b0; ">{</span>  <span style="color:#9999a9; ">//爆裂咒語，注意基本傷害100之後再裝飾者模式修飾</span>
+	
+	Explosion<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+		description<span style="color:#d2cd86; ">=</span><span style="color:#00c4c4; ">"Explosion!"</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> <span style="color:#009f00; ">100.0</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">class</span> BallSpell <span style="color:#e66170; font-weight:bold; ">extends</span> Spell<span style="color:#b060b0; ">{</span>  <span style="color:#9999a9; ">//球型化咒語,沒有增加傷害</span>
+	Word word<span style="color:#b060b0; ">;</span>
+
+	BallSpell<span style="color:#d2cd86; ">(</span>Word word<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>word<span style="color:#d2cd86; ">=</span>word<span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; font-weight:bold; ">String</span> getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> word<span style="color:#d2cd86; ">.</span>getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">",成球型"</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> word<span style="color:#d2cd86; ">.</span>damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>	
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">class</span> IncreaseSpell <span style="color:#e66170; font-weight:bold; ">extends</span> Spell<span style="color:#b060b0; ">{</span> <span style="color:#9999a9; ">//增幅化咒語,傷害*3</span>
+	Word word<span style="color:#b060b0; ">;</span>
+
+	IncreaseSpell<span style="color:#d2cd86; ">(</span>Word word<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>word<span style="color:#d2cd86; ">=</span>word<span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; font-weight:bold; ">String</span> getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> word<span style="color:#d2cd86; ">.</span>getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">",增幅"</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> word<span style="color:#d2cd86; ">.</span>damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">*</span><span style="color:#008c00; ">3</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>	
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">class</span> ThrowSpell <span style="color:#e66170; font-weight:bold; ">extends</span> Spell<span style="color:#b060b0; ">{</span> <span style="color:#9999a9; ">//投擲咒語,傷害+50</span>
+	Word word<span style="color:#b060b0; ">;</span>
+
+	ThrowSpell<span style="color:#d2cd86; ">(</span>Word word<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>word<span style="color:#d2cd86; ">=</span>word<span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; font-weight:bold; ">String</span> getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> word<span style="color:#d2cd86; ">.</span>getDescription<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">",投擲"</span><span style="color:#00c4c4; "></span><span style="color:#ffffff; background:#dd0000; ">;</span>
+	<span style="color:#b060b0; ">}</span>
+	
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#bb7977; ">double</span> damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">return</span> <span style="color:#009f00; ">.20</span><span style="color:#d2cd86; ">+</span>word<span style="color:#d2cd86; ">.</span>damage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>	
+<span style="color:#b060b0; ">}</span>
+</pre>
+
+
+    
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2>輸出</h2>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/DecoratorPattern2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+										<p>使用裝飾者模式可以新增功能時避免更動以實作的程式碼</p>
+
+										<hr class="major" />
+										<h2>Java上實際應用舉例：Java I/O</h2>
+	
+										<h2>UML概念</h2>
+	
+										<span class="image object">
+											<img src="images/DecoratorPatternIOUML.jpg" alt="" />
+										</span>
+										
+										<!-- <hr class="major" />
+										<h2>實作示意</h2> -->
+                                        
+										<hr class="major" />
+    
+                                        <ul class="contact">
+                                           <li class="icon brands fa-github" ><a href="https://github.com/Singularity-one/DesignPatterns/blob/aca9e0c6d4ae5a188ade617a852480a2064cac4a/src/DecoratorPattern.java">範例</a></li>
+                                        </ul>
+
+    
+                        </section>
+                </div>
+            </div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">設計模式  DESIGN PATTERNS</span>
+									<ul>
+										<li><a href="StrategyPattern.html">策略模式(Strategy Pattern)</a></li>
+										<li><a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a></li>
+										<li><a href="DecoratorPattern.html">裝飾者模式(Decorator Pattern)</a></li>
+										<li><a href="Factory&AbstractFactoryPattern.html">工廠和抽象工廠模式(Factory & Abstract Factory Pattern)</a></li>
+										<li><a href="SingletonPattern.html">單例模式(Singleton Pattern)</a></li>
+										<li><a href="CommandPattern.html">命令模式(Command Pattern)</a></li>
+										<li><a href="AdapterPattern.html">轉接器模式(Adapter Pattern)</a></li>
+										<li><a href="FacadePattern.html">表象模式(Facade Pattern)</a></li>
+										<li><a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a></li>
+										<li><a href="IteratorPattern.html">反覆器模式(Iterator Pattern)</a></li>
+										<li><a href="CompositePattern.html">合成模式(Composite Pattern)</a></li>
+										<li><a href="StatePattern.html">狀態模式(State Pattern)</a></li>
+										<li><a href="ProxyPattern.html">代理人模式(Proxy Pattern)</a></li>
+										<li><a href="CompoundPattern.html">複合模式(Compound Pattern)</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+
+					<!-- Section -->
+						<section>
+							<!-- <header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+								Nashville, TN 00000-0000</li>
+							</ul> -->
+						</section>
+				</div>
+			</div>
+   </div>
+
+
+     <!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+</body>
+</html>

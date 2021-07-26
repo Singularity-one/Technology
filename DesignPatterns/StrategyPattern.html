@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+    <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                    <header id="header">
+                            <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
+                    </header>
+
+                    <!-- Content -->
+                    <section>
+                                    <header class="main">
+                                        <h1>策略模式</h1>
+                                        <h2>Strategy Pattern</h2>
+                                    </header>
+
+                                    <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+                                    <p>定義演算法家族，個別封裝起來，讓它們之間可以交互替換，此模式讓演算的變動，不會影響到使用演算法的程式</p>
+
+                                    <hr class="major" />
+
+                                    <h2>UML概念</h2>
+                                    
+                                    <span class="image object">
+                                        <img src="images/StrategyPatternUML.jpg" alt="" />
+                                    </span>
+
+                                    <hr class="major" />
+
+                                    <h2>實作策略模式</h2>
+                                    
+                                    <div>
+                                        <pre style='color:#d1d1d1;background:#000000;'><span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#e66170; font-weight:bold; '>class</span> StrategyPattern <span style='color:#b060b0; '>{</span>
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#e66170; font-weight:bold; '>static</span> <span style='color:#bb7977; '>void</span> main<span style='color:#d2cd86; '>(</span><span style='color:#bb7977; font-weight:bold; '>String</span><span style='color:#d2cd86; '>[</span><span style='color:#d2cd86; '>]</span> args<span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+                                                StrategyContext strategyContext <span style='color:#d2cd86; '>=</span><span style='color:#e66170; font-weight:bold; '>new</span> StrategyContext<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                                
+                                                strategyContext<span style='color:#d2cd86; '>.</span>setStrategy<span style='color:#d2cd86; '>(</span><span style='color:#e66170; font-weight:bold; '>new</span> ConcreteStrategyA<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                                strategyContext<span style='color:#d2cd86; '>.</span>ContextInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                                
+                                                strategyContext<span style='color:#d2cd86; '>.</span>setStrategy<span style='color:#d2cd86; '>(</span><span style='color:#e66170; font-weight:bold; '>new</span> ConcreteStrategyB<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                                strategyContext<span style='color:#d2cd86; '>.</span>ContextInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                                
+                                            <span style='color:#b060b0; '>}</span>
+                                        <span style='color:#b060b0; '>}</span>
+                                        
+                                        <span style='color:#e66170; font-weight:bold; '>abstract</span> <span style='color:#e66170; font-weight:bold; '>class</span> Strategy<span style='color:#b060b0; '>{</span>
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#e66170; font-weight:bold; '>abstract</span> <span style='color:#bb7977; '>void</span> AlgorithmInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                        <span style='color:#b060b0; '>}</span>
+                                        
+                                        <span style='color:#e66170; font-weight:bold; '>class</span> ConcreteStrategyA <span style='color:#e66170; font-weight:bold; '>extends</span> Strategy<span style='color:#b060b0; '>{</span>
+                                        
+                                            <span style='color:#8695b8; font-weight:bold; '>@Override</span>
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#bb7977; '>void</span> AlgorithmInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+                                                <span style='color:#bb7977; font-weight:bold; '>System</span><span style='color:#d2cd86; '>.</span>out<span style='color:#d2cd86; '>.</span>println<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>"執行ConcreteStrategyA的AlgorithmInterface"</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                            <span style='color:#b060b0; '>}</span>
+                                        <span style='color:#b060b0; '>}</span>
+                                        
+                                        <span style='color:#e66170; font-weight:bold; '>class</span> ConcreteStrategyB <span style='color:#e66170; font-weight:bold; '>extends</span> Strategy<span style='color:#b060b0; '>{</span>
+                                        
+                                            <span style='color:#8695b8; font-weight:bold; '>@Override</span>
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#bb7977; '>void</span> AlgorithmInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+                                                <span style='color:#bb7977; font-weight:bold; '>System</span><span style='color:#d2cd86; '>.</span>out<span style='color:#d2cd86; '>.</span>println<span style='color:#d2cd86; '>(</span><span style='color:#00c4c4; '>"執行ConcreteStrategyB的AlgorithmInterface"</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                            <span style='color:#b060b0; '>}</span>
+                                        <span style='color:#b060b0; '>}</span>
+                                        
+                                        <span style='color:#e66170; font-weight:bold; '>class</span> StrategyContext <span style='color:#b060b0; '>{</span>
+                                            
+                                            <span style='color:#e66170; font-weight:bold; '>private</span> Strategy strategy <span style='color:#b060b0; '>;</span>
+                                            
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#bb7977; '>void</span> setStrategy<span style='color:#d2cd86; '>(</span>Strategy strategy<span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+                                                <span style='color:#e66170; font-weight:bold; '>this</span><span style='color:#d2cd86; '>.</span>strategy <span style='color:#d2cd86; '>=</span>strategy<span style='color:#b060b0; '>;</span>
+                                            <span style='color:#b060b0; '>}</span>
+                                            
+                                            <span style='color:#e66170; font-weight:bold; '>public</span> <span style='color:#bb7977; '>void</span> ContextInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span> <span style='color:#b060b0; '>{</span>
+                                                strategy<span style='color:#d2cd86; '>.</span>AlgorithmInterface<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span><span style='color:#b060b0; '>;</span>
+                                            <span style='color:#b060b0; '>}</span>
+                                            
+                                        <span style='color:#b060b0; '>}</span>
+                                        </pre>
+                                    </div>
+
+                                    <hr class="major" />
+
+                                    <h2>輸出</h2>
+                                    <div>
+                                        <span class="image object">
+                                            <img src="images/StrategyPattern2.jpg" alt="" />
+                                        </span>
+                                    </div>
+
+                                    <p>利用不同物件設定Context物件，讓Context物件去執行各種演算法得出不同結果</p>
+
+                                    <hr class="major" />
+                                    <h2>Java上實際應用舉例：Servlet的策略模式和樣板方法模式</h2>
+
+                                    <h2>UML概念</h2>
+
+                                    <span class="image object">
+                                        <img src="images/StrategyPatternServletUML.jpg" alt="" />
+                                    </span>
+                                    
+                                    <hr class="major" />
+                                    <h2>實作示意</h2>
+                                    
+                                    <div>           
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> java</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">io</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">*</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> javax</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">*</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">import</span><span style="color:#008073; "> javax</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">servlet</span><span style="color:#d2cd86; ">.</span><span style="color:#008073; ">http</span><span style="color:#d2cd86; ">.</span><span style="color:#e66170; font-weight:bold; ">*</span><span style="color:#b060b0; ">;</span>
+    
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> HelloWorldServlet <span style="color:#e66170; font-weight:bold; ">extends</span> HttpServlet <span style="color:#b060b0; ">{</span>
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> doGet<span style="color:#d2cd86; ">(</span>HttpServletRequest req<span style="color:#d2cd86; ">,</span> HttpServletResponse res<span style="color:#d2cd86; ">)</span> <span style="color:#e66170; font-weight:bold; ">throws</span> ServletException<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">IOException</span> <span style="color:#b060b0; ">{</span>
+            
+        <span style="color:#b060b0; ">}</span>
+        
+        <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> doPost<span style="color:#d2cd86; ">(</span>HttpServletRequest req<span style="color:#d2cd86; ">,</span> HttpServletResponse res<span style="color:#d2cd86; ">)</span> <span style="color:#e66170; font-weight:bold; ">throws</span> ServletException<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">IOException</span> <span style="color:#b060b0; ">{</span>
+            
+        <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                    </div>
+
+                                    <p>HttpServlet 透過繼承GenericServlet實現Servlet介面，servlet開發者可以重寫doGet,doPost對應Http請求的類型方法</p>
+
+                                    <hr class="major" />
+    
+                                    <h2>相關</h2>
+                                    <a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a><br>
+
+                                    <hr class="major" />
+                                    <h2>Java上實際應用舉例：Model-View-Controller MVC 設計模式</h2>
+    
+                                    <h2>概念</h2>
+    
+                                    <span class="image object">
+                                            <img src="images/StrategyPatternMVC.jpg" alt="" />
+                                    </span>
+
+                                    <hr class="major" />
+    
+                                    <h2>相關</h2>
+                                    <a href="CompoundPattern.html">複合模式(Compound Pattern) 舉例:MVC 設計模式</a><br>
+
+                                    <hr class="major" />
+    
+                                    <ul class="contact">
+                                        <li class="icon brands fa-github"><a href="https://github.com/Singularity-one/DesignPatterns/blob/aca9e0c6d4ae5a188ade617a852480a2064cac4a/src/StrategyPattern.java">範例</a></li>
+                                    </ul>
+
+
+                    </section>
+            </div>
+        </div>
+
+        	<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">設計模式  DESIGN PATTERNS</span>
+									<ul>
+										<li><a href="StrategyPattern.html">策略模式(Strategy Pattern)</a></li>
+										<li><a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a></li>
+										<li><a href="DecoratorPattern.html">裝飾者模式(Decorator Pattern)</a></li>
+										<li><a href="Factory&AbstractFactoryPattern.html">工廠和抽象工廠模式(Factory & Abstract Factory Pattern)</a></li>
+										<li><a href="SingletonPattern.html">單例模式(Singleton Pattern)</a></li>
+										<li><a href="CommandPattern.html">命令模式(Command Pattern)</a></li>
+										<li><a href="AdapterPattern.html">轉接器模式(Adapter Pattern)</a></li>
+										<li><a href="FacadePattern.html">表象模式(Facade Pattern)</a></li>
+										<li><a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a></li>
+										<li><a href="IteratorPattern.html">反覆器模式(Iterator Pattern)</a></li>
+										<li><a href="CompositePattern.html">合成模式(Composite Pattern)</a></li>
+										<li><a href="StatePattern.html">狀態模式(State Pattern)</a></li>
+										<li><a href="ProxyPattern.html">代理人模式(Proxy Pattern)</a></li>
+										<li><a href="CompoundPattern.html">複合模式(Compound Pattern)</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+
+					<!-- Section -->
+						<section>
+							<!-- <header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+								Nashville, TN 00000-0000</li>
+							</ul> -->
+						</section>
+				</div>
+			</div>
+</div>
+
+     <!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header id="95day" class="main">
+                                            <h1>Spring Boot + Spring Data JPA + H2 的CRUD (下)</h1>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <hr class="major" />
+    
+                                        <h2 id="95_nameLike">名字模糊查詢</h2>
+                                        <p>單一查詢 實作</p>
+                                        
+                                        <h3>VendorRespository 加入</h3>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//名字模糊查</span>
+    List&lt;Vendor&gt; findByNameLike(String name)<span style="color:#d2cd86; ">;</span>
+    </pre>
+                                        </div>
+
+                                        <h3>VendorService 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//名字查詢</span>
+    List&lt;Vendor&gt; findByNameLike(String name)<span style="color:#d2cd86; ">;</span>
+    </pre>
+                                        </div>
+
+                                        <h3>VendorServiceImpl 加入</h3>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#8695b8; font-weight:bold; ">@Override</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> List&lt;Vendor&gt; findByNameLike(String name) <span style="color:#b060b0; ">{</span>
+        <span style="color:#e66170; font-weight:bold; ">return</span> vendorRespository<span style="color:#d2cd86; ">.</span>findByNameLike<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"%"</span><span style="color:#d2cd86; ">+</span>name<span style="color:#d2cd86; ">+</span><span style="color:#00c4c4; ">"%"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>
+                                        </div>
+
+                                        <h3>VendorController 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//名子模糊查詢</span>
+    <span style="color:#8695b8; font-weight:bold; ">@RequestMapping(value = "/findByNameLike", method = { RequestMethod.GET, RequestMethod.POST })</span>
+    <span style="color:#8695b8; font-weight:bold; ">@ResponseBody</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> VendorResponse findByNameLike(<span style="color:#8695b8; font-weight:bold; ">@RequestBody</span> VendorRequest request) <span style="color:#b060b0; ">{</span>
+            
+        VendorResponse response <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        VendorResponseBody body <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponseBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Vendor vendor <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Vendor<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span> errorMsgs <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">LinkedList</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                
+        <span style="color:#e66170; font-weight:bold; ">try</span> <span style="color:#b060b0; ">{</span>
+            BeanUtils<span style="color:#d2cd86; ">.</span>copyProperties<span style="color:#d2cd86; ">(</span>request<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> vendor<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                    
+            <span style="color:#bb7977; font-weight:bold; ">String</span> name <span style="color:#d2cd86; ">=</span> vendor<span style="color:#d2cd86; ">.</span>getName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span>name <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">null</span> <span style="color:#d2cd86; ">|</span><span style="color:#d2cd86; ">|</span> name<span style="color:#d2cd86; ">.</span>trim<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>length<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"name: 請勿空白"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#b060b0; ">}</span>
+                    
+                    
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">!</span>errorMsgs<span style="color:#d2cd86; ">.</span>isEmpty<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span> <span style="color:#9999a9; ">//程式中斷</span>
+            <span style="color:#b060b0; ">}</span>
+                    
+            <span style="color:#9999a9; ">//資料進行存取</span>
+            <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> vendorService<span style="color:#d2cd86; ">.</span>findByNameLike<span style="color:#d2cd86; ">(</span>name<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"200"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setDataList<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                    
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+                    
+        <span style="color:#b060b0; ">}</span><span style="color:#e66170; font-weight:bold; ">catch</span> <span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Exception</span> e<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"查詢資料失敗:"</span><span style="color:#d2cd86; ">+</span>e<span style="color:#d2cd86; ">.</span>getMessage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+
+                                        <h3>Postman 測試</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/95_NameLike.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="95_findBySQL">如果需要自己寫SQL 業務邏輯</h2>
+                                        <h3>VendorRespository 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//@Query查詢</span>
+    <span style="color:#8695b8; font-weight:bold; ">@Query(value = "select * from VENDOR  where name = ? and addr = ?", nativeQuery = true)</span>
+    List&lt;Vendor&gt; findBySQL(<span style="color:#8695b8; font-weight:bold; ">@Param("name")</span> String name,  <span style="color:#8695b8; font-weight:bold; ">@Param("addr")</span> String addr)<span style="color:#d2cd86; ">;</span>
+    </pre>    
+                                        </div>
+                                        <h3>VendorService 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//輸入條件用SQL找</span>
+    List&lt;Vendor&gt; findBySQL(String name,String addr)<span style="color:#d2cd86; ">;</span>
+    </pre>
+    
+                                        </div>
+                                        <h3>VendorServiceImpl 加入</h3>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#8695b8; font-weight:bold; ">@Override</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> List&lt;Vendor&gt; findBySQL(String name, String addr) <span style="color:#b060b0; ">{</span>
+         <span style="color:#e66170; font-weight:bold; ">return</span> vendorRespository<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span>name<span style="color:#d2cd86; ">,</span>addr<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+                                        <h3>VendorController 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//查詢SQL</span>
+    <span style="color:#8695b8; font-weight:bold; ">@RequestMapping(value = "/findBySQL", method = { RequestMethod.GET, RequestMethod.POST })</span>
+    <span style="color:#8695b8; font-weight:bold; ">@ResponseBody</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> VendorResponse findBySQL(<span style="color:#8695b8; font-weight:bold; ">@RequestBody</span> VendorRequest request) <span style="color:#b060b0; ">{</span>
+    
+        VendorResponse response <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        VendorResponseBody body <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponseBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Vendor vendor <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Vendor<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span> errorMsgs <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">LinkedList</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            
+        <span style="color:#e66170; font-weight:bold; ">try</span> <span style="color:#b060b0; ">{</span>
+            BeanUtils<span style="color:#d2cd86; ">.</span>copyProperties<span style="color:#d2cd86; ">(</span>request<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> vendor<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                
+            <span style="color:#bb7977; font-weight:bold; ">String</span> name <span style="color:#d2cd86; ">=</span> vendor<span style="color:#d2cd86; ">.</span>getName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span>name <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">null</span> <span style="color:#d2cd86; ">|</span><span style="color:#d2cd86; ">|</span> name<span style="color:#d2cd86; ">.</span>trim<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>length<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"name: 請勿空白"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#bb7977; font-weight:bold; ">String</span> addr <span style="color:#d2cd86; ">=</span> vendor<span style="color:#d2cd86; ">.</span>getAddr<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span>addr <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">null</span> <span style="color:#d2cd86; ">|</span><span style="color:#d2cd86; ">|</span> addr<span style="color:#d2cd86; ">.</span>trim<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>length<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"addr: 請勿空白"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">!</span>errorMsgs<span style="color:#d2cd86; ">.</span>isEmpty<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span> <span style="color:#9999a9; ">//程式中斷</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#9999a9; ">//資料進行存取</span>
+            <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> vendorService<span style="color:#d2cd86; ">.</span>findBySQL<span style="color:#d2cd86; ">(</span>name<span style="color:#d2cd86; ">,</span>addr<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"200"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setDataList<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+                
+        <span style="color:#b060b0; ">}</span><span style="color:#e66170; font-weight:bold; ">catch</span> <span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Exception</span> e<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"查詢資料失敗:"</span><span style="color:#d2cd86; ">+</span>e<span style="color:#d2cd86; ">.</span>getMessage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+                                        <h3>Postman 測試</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/95_findBySQL.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="95_page">Spring boot +JPA 頁碼</h2>
+                                        <h3>VendorService 加入</h3>
+                                        <div>
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//頁碼</span>
+    List&lt;Vendor&gt; findAllByPage(int page,int size)<span style="color:#d2cd86; ">;</span>
+    </pre>    
+                                        </div>
+                                        <h3>VendorServiceImpl 加入</h3>
+                                        <div>
+
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#8695b8; font-weight:bold; ">@Override</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> List&lt;Vendor&gt; findAllByPage(int page, int size) <span style="color:#b060b0; ">{</span>
+        Page<span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> pageResult <span style="color:#d2cd86; ">=</span> vendorRespository<span style="color:#d2cd86; ">.</span>findAll<span style="color:#d2cd86; ">(</span>
+         PageRequest<span style="color:#d2cd86; ">.</span>of<span style="color:#d2cd86; ">(</span>page<span style="color:#d2cd86; ">,</span>  <span style="color:#9999a9; ">// 目前頁碼，從0起算</span>
+                 size<span style="color:#d2cd86; ">,</span> <span style="color:#9999a9; ">// 每頁筆數</span>
+                 Sort<span style="color:#d2cd86; ">.</span>by<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"id"</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>ascending<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span> <span style="color:#9999a9; ">// 依ID欄位排序</span>
+                  
+        <span style="color:#e66170; font-weight:bold; ">return</span> pageResult<span style="color:#d2cd86; ">.</span>getContent<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>
+    </pre>
+    
+                                        </div>
+                                        <h3>VendorController 加入</h3>
+                                        <div>
+                                            
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#9999a9; ">//得到頁數</span>
+    <span style="color:#8695b8; font-weight:bold; ">@PostMapping(value = "/page", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)</span>
+    <span style="color:#8695b8; font-weight:bold; ">@ResponseBody</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> VendorResponse page(<span style="color:#8695b8; font-weight:bold; ">@RequestBody</span> VendorRequest request) <span style="color:#b060b0; ">{</span>
+        VendorResponse response <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponse<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        VendorResponseBody body <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> VendorResponseBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        Vendor vendor <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> Vendor<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+        <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span> errorMsgs <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">LinkedList</span><span style="color:#d2cd86; ">&lt;</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            
+        <span style="color:#e66170; font-weight:bold; ">try</span> <span style="color:#b060b0; ">{</span>
+                
+            <span style="color:#bb7977; font-weight:bold; ">String</span> page <span style="color:#d2cd86; ">=</span> request<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getPage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span>page <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">null</span> <span style="color:#d2cd86; ">|</span><span style="color:#d2cd86; ">|</span> page<span style="color:#d2cd86; ">.</span>trim<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>length<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                    errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"page: 請勿空白"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#bb7977; font-weight:bold; ">String</span> size <span style="color:#d2cd86; ">=</span> request<span style="color:#d2cd86; ">.</span>getBody<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>getSize<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span>size <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">null</span> <span style="color:#d2cd86; ">|</span><span style="color:#d2cd86; ">|</span> size<span style="color:#d2cd86; ">.</span>trim<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">.</span>length<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">=</span> <span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                    errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"size: 請勿空白"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#e66170; font-weight:bold; ">if</span> <span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">!</span>errorMsgs<span style="color:#d2cd86; ">.</span>isEmpty<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span> <span style="color:#9999a9; ">//程式中斷</span>
+            <span style="color:#b060b0; ">}</span>
+                
+            <span style="color:#9999a9; ">//資料進行存取</span>
+            <span style="color:#bb7977; ">int</span> IntPage <span style="color:#d2cd86; ">=</span> <span style="color:#bb7977; font-weight:bold; ">Integer</span><span style="color:#d2cd86; ">.</span>parseInt<span style="color:#d2cd86; ">(</span>page<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#bb7977; ">int</span> IntSize <span style="color:#d2cd86; ">=</span> <span style="color:#bb7977; font-weight:bold; ">Integer</span><span style="color:#d2cd86; ">.</span>parseInt<span style="color:#d2cd86; ">(</span>size<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                
+            <span style="color:#bb7977; font-weight:bold; ">List</span><span style="color:#d2cd86; ">&lt;</span>Vendor<span style="color:#d2cd86; ">&gt;</span> dataList <span style="color:#d2cd86; ">=</span> vendorService<span style="color:#d2cd86; ">.</span>findAllByPage<span style="color:#d2cd86; ">(</span>IntPage<span style="color:#d2cd86; ">,</span>IntSize<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"200"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setDataList<span style="color:#d2cd86; ">(</span>dataList<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+                
+        <span style="color:#b060b0; ">}</span><span style="color:#e66170; font-weight:bold; ">catch</span> <span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Exception</span> e<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+            errorMsgs<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"查詢資料失敗:"</span><span style="color:#d2cd86; ">+</span>e<span style="color:#d2cd86; ">.</span>getMessage<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnCode<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"error"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            body<span style="color:#d2cd86; ">.</span>setReturnMsg<span style="color:#d2cd86; ">(</span>errorMsgs<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            response<span style="color:#d2cd86; ">.</span>setBody<span style="color:#d2cd86; ">(</span>body<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+            <span style="color:#e66170; font-weight:bold; ">return</span> response<span style="color:#b060b0; ">;</span>
+        <span style="color:#b060b0; ">}</span>	
+    <span style="color:#b060b0; ">}</span>
+    </pre>    
+                                        </div>
+                                        <h3>Postman 測試</h3>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/95_Page.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+    
+										<ul class="contact">
+											<li class="icon brands fa-github"><a  href=" https://github.com/Singularity-one/14week_SpringBoot/tree/main">範例</a></li>
+										</ul>
+
+
+
+
+
+
+
+
+
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Java 100天</span>
+									<ul>
+                                        <li><a href="../14Week.html">第十四週 Spring Boot</a></li>
+                                        <ul>
+                                            <li><a href="#95day">第95天 Spring Boot + Spring Data JPA + H2 的CRUD (下)</a></li>
+                                            <li><a href="#95_nameLike">名字模糊查詢</a></li>
+                                            <li><a href="#95_findBySQL">如果需要自己寫SQL 業務邏輯</a></li>
+                                            <li><a href="#95_page">Spring boot +JPA 頁碼</a></li>
+                                        </ul>
+									</ul>
+								</li>
+								<li><a href="../../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

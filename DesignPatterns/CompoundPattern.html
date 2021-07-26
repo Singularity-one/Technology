@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                                <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header class="main">
+                                            <h1>複合模式</h1>
+											           <h2>Compound Pattern</h2>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <p>Model-View-Controller</p>
+    
+                                        <hr class="major" />
+    
+                                        <h2>概念</h2>
+                                        
+                                        <span class="image object">
+                                            <img src="images/CompoundPatternUML.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>實作複合模式</h2>
+                                        <p>實作</p>
+                                        
+                                        <div>
+
+                                            <pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> CompoundPattern <span style="color:#b060b0; ">{</span>
+                                                <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">static</span> <span style="color:#bb7977; ">void</span> main<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">[</span><span style="color:#d2cd86; ">]</span> args<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                                      StoreA model  <span style="color:#d2cd86; ">=</span> retriveStore<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                            
+                                                      
+                                                      StoreAView view <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> StoreAView<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                            
+                                                      StoreController controller <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> StoreController<span style="color:#d2cd86; ">(</span>model<span style="color:#d2cd86; ">,</span> view<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                            
+                                                      controller<span style="color:#d2cd86; ">.</span>updateView<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                            
+                                                      
+                                                      controller<span style="color:#d2cd86; ">.</span>setStoreAName<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"B商�-"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                      controller<span style="color:#d2cd86; ">.</span>setStoreAData<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"特賣B"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                            
+                                                      controller<span style="color:#d2cd86; ">.</span>updateView<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                <span style="color:#b060b0; ">}</span>
+                                                
+                                                <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#e66170; font-weight:bold; ">static</span> StoreA retriveStore<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                       StoreA store <span style="color:#d2cd86; ">=</span> <span style="color:#e66170; font-weight:bold; ">new</span> StoreA<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                       store<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"A商�-"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                       store<span style="color:#d2cd86; ">.</span>setData<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"特賣A"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                       <span style="color:#e66170; font-weight:bold; ">return</span> store<span style="color:#b060b0; ">;</span>
+                                                <span style="color:#b060b0; ">}</span>
+                                            <span style="color:#b060b0; ">}</span>
+                                            
+                                            <span style="color:#e66170; font-weight:bold; ">class</span> StoreA <span style="color:#b060b0; ">{</span>
+                                                   <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#b060b0; ">;</span>
+                                                   
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">String</span> getName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">return</span> name<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                                   
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setName<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>name <span style="color:#d2cd86; ">=</span> name<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                                   
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">String</span> getData<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">return</span> data<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                                   
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setData<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>data <span style="color:#d2cd86; ">=</span> data<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                            <span style="color:#b060b0; ">}</span>
+                                            
+                                            <span style="color:#e66170; font-weight:bold; ">class</span> StoreAView <span style="color:#b060b0; ">{</span>
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> printStoreAData<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#d2cd86; ">,</span> <span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Store: "</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                      <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Name: "</span> <span style="color:#d2cd86; ">+</span> name<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                      <span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"Data: "</span> <span style="color:#d2cd86; ">+</span> data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                            <span style="color:#b060b0; ">}</span>
+                                            
+                                            <span style="color:#e66170; font-weight:bold; ">class</span> StoreController <span style="color:#b060b0; ">{</span>
+                                                   <span style="color:#e66170; font-weight:bold; ">private</span> StoreA model<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#e66170; font-weight:bold; ">private</span> StoreAView view<span style="color:#b060b0; ">;</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> StoreController<span style="color:#d2cd86; ">(</span>StoreA model<span style="color:#d2cd86; ">,</span> StoreAView view<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>model <span style="color:#d2cd86; ">=</span> model<span style="color:#b060b0; ">;</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>view <span style="color:#d2cd86; ">=</span> view<span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setStoreAName<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      model<span style="color:#d2cd86; ">.</span>setName<span style="color:#d2cd86; ">(</span>name<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>		
+                                                   <span style="color:#b060b0; ">}</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">String</span> getStoreAName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">return</span> model<span style="color:#d2cd86; ">.</span>getName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>		
+                                                   <span style="color:#b060b0; ">}</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setStoreAData<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      model<span style="color:#d2cd86; ">.</span>setData<span style="color:#d2cd86; ">(</span>data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>		
+                                                   <span style="color:#b060b0; ">}</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; font-weight:bold; ">String</span> getStoreAData<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+                                                      <span style="color:#e66170; font-weight:bold; ">return</span> model<span style="color:#d2cd86; ">.</span>getData<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>		
+                                                   <span style="color:#b060b0; ">}</span>
+                                            
+                                                   <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> updateView<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>				
+                                                      view<span style="color:#d2cd86; ">.</span>printStoreAData<span style="color:#d2cd86; ">(</span>model<span style="color:#d2cd86; ">.</span>getName<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">,</span> model<span style="color:#d2cd86; ">.</span>getData<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                                   <span style="color:#b060b0; ">}</span>	
+                                            <span style="color:#b060b0; ">}</span>
+                                            </pre>                                                                                 
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2>輸出</h2>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/CompoundPattern2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2>Java上實際應用舉例：Model 2</h2>
+
+                                        <h2>概念</h2>
+    
+                                        <span class="image object">
+                                            <img src="images/CompositePatternModel2.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>相關</h2>
+                                        <a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a><br>
+										          <a href="StrategyPattern.html">策略模式(Strategy Pattern)</a><br>
+										          <a href="CompositePattern.html">合成模式(Composite Pattern)</a><br>
+
+                                        <hr class="major" />
+    
+                                        <ul class="contact">
+                                           <li class="icon brands fa-github" ><a href="https://github.com/Singularity-one/DesignPatterns/blob/aca9e0c6d4ae5a188ade617a852480a2064cac4a/src/CompoundPattern.java">範例</a></li>
+                                        </ul>
+
+
+
+    
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">設計模式  DESIGN PATTERNS</span>
+									<ul>
+										<li><a href="StrategyPattern.html">策略模式(Strategy Pattern)</a></li>
+										<li><a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a></li>
+										<li><a href="DecoratorPattern.html">裝飾者模式(Decorator Pattern)</a></li>
+										<li><a href="Factory&AbstractFactoryPattern.html">工廠和抽象工廠模式(Factory & Abstract Factory Pattern)</a></li>
+										<li><a href="SingletonPattern.html">單例模式(Singleton Pattern)</a></li>
+										<li><a href="CommandPattern.html">命令模式(Command Pattern)</a></li>
+										<li><a href="AdapterPattern.html">轉接器模式(Adapter Pattern)</a></li>
+										<li><a href="FacadePattern.html">表象模式(Facade Pattern)</a></li>
+										<li><a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a></li>
+										<li><a href="IteratorPattern.html">反覆器模式(Iterator Pattern)</a></li>
+										<li><a href="CompositePattern.html">合成模式(Composite Pattern)</a></li>
+										<li><a href="StatePattern.html">狀態模式(State Pattern)</a></li>
+										<li><a href="ProxyPattern.html">代理人模式(Proxy Pattern)</a></li>
+										<li><a href="CompoundPattern.html">複合模式(Compound Pattern)</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+
+					<!-- Section -->
+						<section>
+							<!-- <header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+								Nashville, TN 00000-0000</li>
+							</ul> -->
+						</section>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

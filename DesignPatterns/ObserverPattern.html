@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                                <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header class="main">
+                                            <h1>觀察者模式</h1>
+                                            <h2>Observer Pattern</h2>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <p>定義了物件之間的一對多的關係，當一個物件改變狀態，其他相依者都會收到通知並自動更新</p>
+    
+                                        <hr class="major" />
+    
+                                        <h2>概念</h2>
+                                        
+                                        <span class="image object">
+                                            <img src="images/ObserverPattern1.jpg" alt="" />
+                                        </span>
+
+                                        <h2>UML概念</h2>
+                                    
+                                        <span class="image object">
+                                            <img src="images/ObserverPatternUML.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>實作觀察者模式</h2>
+                                        
+                                        <div>
+                                            
+<pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">class</span> ObserverPattern <span style="color:#b060b0; ">{</span>
+	<span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">static</span> <span style="color:#bb7977; ">void</span> main<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span><span style="color:#d2cd86; ">[</span><span style="color:#d2cd86; ">]</span> args<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		Store store <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> Store<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		
+		User userA <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> User<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"A"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		User userB <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> User<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"B"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		
+		store<span style="color:#d2cd86; ">.</span>addObserver<span style="color:#d2cd86; ">(</span>userA<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		store<span style="color:#d2cd86; ">.</span>addObserver<span style="color:#d2cd86; ">(</span>userB<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		
+		store<span style="color:#d2cd86; ">.</span>sendChange<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"特賣1"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+		
+		store<span style="color:#d2cd86; ">.</span>rmoveObserver<span style="color:#d2cd86; ">(</span>userB<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span> <span style="color:#9999a9; ">//B不訂閱</span>
+		
+		store<span style="color:#d2cd86; ">.</span>sendChange<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"特賣2"</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">interface</span> Subject <span style="color:#b060b0; ">{</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> addObserver<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span> o<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> rmoveObserver<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span> o<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> notifyObservers<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+<span style="color:#b060b0; ">}</span>
+
+<span style="color:#e66170; font-weight:bold; ">interface</span> Observer<span style="color:#b060b0; ">{</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> showdata<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span> 
+    
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setdata<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span> 
+<span style="color:#b060b0; ">}</span>
+
+
+<span style="color:#e66170; font-weight:bold; ">class</span> Store <span style="color:#e66170; font-weight:bold; ">implements</span> Subject<span style="color:#b060b0; ">{</span>
+	 <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">ArrayList</span> observers<span style="color:#b060b0; ">;</span>
+     <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#b060b0; ">;</span>
+     
+     <span style="color:#e66170; font-weight:bold; ">public</span> Store<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+         observers <span style="color:#d2cd86; ">=</span><span style="color:#e66170; font-weight:bold; ">new</span> <span style="color:#bb7977; font-weight:bold; ">ArrayList</span><span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+     <span style="color:#b060b0; ">}</span>
+     
+     <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+     <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> addObserver<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span> o<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span> <span style="color:#9999a9; ">//註冊時user時 加到ArrayList後面</span>
+         observers<span style="color:#d2cd86; ">.</span>add<span style="color:#d2cd86; ">(</span>o<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+     <span style="color:#b060b0; ">}</span>
+     
+     <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+     <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> rmoveObserver<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span> o<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span> <span style="color:#9999a9; ">//user想取消 從ArrayList刪除</span>
+         <span style="color:#bb7977; ">int</span> i <span style="color:#d2cd86; ">=</span>observers<span style="color:#d2cd86; ">.</span>indexOf<span style="color:#d2cd86; ">(</span>o<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+         <span style="color:#e66170; font-weight:bold; ">if</span><span style="color:#d2cd86; ">(</span>i<span style="color:#d2cd86; ">&gt;</span><span style="color:#d2cd86; ">=</span><span style="color:#008c00; ">0</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+             observers<span style="color:#d2cd86; ">.</span>remove<span style="color:#d2cd86; ">(</span>i<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+         <span style="color:#b060b0; ">}</span>
+     <span style="color:#b060b0; ">}</span>
+     
+     <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+     <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> notifyObservers<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>  
+         <span style="color:#e66170; font-weight:bold; ">for</span><span style="color:#d2cd86; ">(</span><span style="color:#bb7977; ">int</span> i<span style="color:#d2cd86; ">=</span><span style="color:#008c00; ">0</span><span style="color:#b060b0; ">;</span>i <span style="color:#d2cd86; ">&lt;</span> observers<span style="color:#d2cd86; ">.</span>size<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>i<span style="color:#d2cd86; ">+</span><span style="color:#d2cd86; ">+</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+             <span style="color:#bb7977; font-weight:bold; ">Observer</span> observer <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span><span style="color:#d2cd86; ">)</span>observers<span style="color:#d2cd86; ">.</span>get<span style="color:#d2cd86; ">(</span>i<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+             observer<span style="color:#d2cd86; ">.</span>showdata<span style="color:#d2cd86; ">(</span>data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+         <span style="color:#b060b0; ">}</span>
+     <span style="color:#b060b0; ">}</span>
+     
+     <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> sendChange<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span> <span style="color:#9999a9; ">//商家更新情報通知user</span>
+    	 <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>data<span style="color:#d2cd86; ">=</span>data<span style="color:#b060b0; ">;</span>
+    	 <span style="color:#e66170; font-weight:bold; ">for</span><span style="color:#d2cd86; ">(</span><span style="color:#bb7977; ">int</span> i<span style="color:#d2cd86; ">=</span><span style="color:#008c00; ">0</span><span style="color:#b060b0; ">;</span>i <span style="color:#d2cd86; ">&lt;</span> observers<span style="color:#d2cd86; ">.</span>size<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>i<span style="color:#d2cd86; ">+</span><span style="color:#d2cd86; ">+</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+             <span style="color:#bb7977; font-weight:bold; ">Observer</span> observer <span style="color:#d2cd86; ">=</span><span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">Observer</span><span style="color:#d2cd86; ">)</span>observers<span style="color:#d2cd86; ">.</span>get<span style="color:#d2cd86; ">(</span>i<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+             observer<span style="color:#d2cd86; ">.</span>setdata<span style="color:#d2cd86; ">(</span>data<span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+         <span style="color:#b060b0; ">}</span>
+         notifyObservers<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+     <span style="color:#b060b0; ">}</span> 
+<span style="color:#b060b0; ">}</span>
+
+
+<span style="color:#e66170; font-weight:bold; ">class</span> User <span style="color:#e66170; font-weight:bold; ">implements</span> Observer<span style="color:#b060b0; ">{</span>
+    <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#b060b0; ">;</span>
+    <span style="color:#e66170; font-weight:bold; ">private</span> <span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#b060b0; ">;</span>
+  
+    <span style="color:#e66170; font-weight:bold; ">public</span> User<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> name<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+        <span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>name<span style="color:#d2cd86; ">=</span> name<span style="color:#b060b0; ">;</span>
+    <span style="color:#b060b0; ">}</span>	
+      
+    <span style="color:#8695b8; font-weight:bold; ">@Override</span>
+    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> showdata<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+    	<span style="color:#bb7977; font-weight:bold; ">System</span><span style="color:#d2cd86; ">.</span>out<span style="color:#d2cd86; ">.</span>println<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">"通知使用者</span><span style="color:#00c4c4; ">"+name+"</span><span style="color:#d2cd86; ">:</span><span style="color:#00c4c4; ">"+data)</span><span style="color:#ffffff; background:#dd0000; ">;</span>
+    <span style="color:#ffffff; background:#dd0000; ">}</span>
+
+	<span style="color:#8695b8; font-weight:bold; ">@Override</span>
+	<span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> setdata<span style="color:#d2cd86; ">(</span><span style="color:#bb7977; font-weight:bold; ">String</span> data<span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+		<span style="color:#e66170; font-weight:bold; ">this</span><span style="color:#d2cd86; ">.</span>data<span style="color:#d2cd86; ">=</span> data<span style="color:#b060b0; ">;</span>
+	<span style="color:#b060b0; ">}</span>      
+<span style="color:#ffffff; background:#dd0000; ">}</span>
+</pre>
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2>輸出</h2>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/ObserverPattern2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2>Java上實際應用舉例：Model-View-Controller MVC 設計模式</h2>
+    
+                                        <h2>概念</h2>
+    
+                                        <span class="image object">
+                                            <img src="images/ObserverPatternMVC.jpg" alt="" />
+                                        </span>
+
+                                        <hr class="major" />
+    
+                                        <h2>相關</h2>
+                                        <a href="CompoundPattern.html">複合模式(Compound Pattern) 舉例:MVC 設計模式</a><br>
+
+                                        <hr class="major" />
+    
+										<ul class="contact">
+											<li class="icon brands fa-github"><a  href="https://github.com/Singularity-one/DesignPatterns/blob/aca9e0c6d4ae5a188ade617a852480a2064cac4a/src/ObserverPattern.java">範例</a></li>
+										</ul>
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">設計模式  DESIGN PATTERNS</span>
+									<ul>
+										<li><a href="StrategyPattern.html">策略模式(Strategy Pattern)</a></li>
+										<li><a href="ObserverPattern.html">觀察者模式(Observer Pattern)</a></li>
+										<li><a href="DecoratorPattern.html">裝飾者模式(Decorator Pattern)</a></li>
+										<li><a href="Factory&AbstractFactoryPattern.html">工廠和抽象工廠模式(Factory & Abstract Factory Pattern)</a></li>
+										<li><a href="SingletonPattern.html">單例模式(Singleton Pattern)</a></li>
+										<li><a href="CommandPattern.html">命令模式(Command Pattern)</a></li>
+										<li><a href="AdapterPattern.html">轉接器模式(Adapter Pattern)</a></li>
+										<li><a href="FacadePattern.html">表象模式(Facade Pattern)</a></li>
+										<li><a href="TemplateMethodPattern.html">樣板方法模式(Template Method Pattern)</a></li>
+										<li><a href="IteratorPattern.html">反覆器模式(Iterator Pattern)</a></li>
+										<li><a href="CompositePattern.html">合成模式(Composite Pattern)</a></li>
+										<li><a href="StatePattern.html">狀態模式(State Pattern)</a></li>
+										<li><a href="ProxyPattern.html">代理人模式(Proxy Pattern)</a></li>
+										<li><a href="CompoundPattern.html">複合模式(Compound Pattern)</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+
+					<!-- Section -->
+						<section>
+							<!-- <header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+								Nashville, TN 00000-0000</li>
+							</ul> -->
+						</section>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
