@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+                                        <header class="main">
+                                            <h1>Linux 指令</h1>
+                                        </header>
+    
+                                        <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    
+                                        <hr class="major" />
+    
+                                        <h2 id="93project">Linux 命令的格式</h2>
+                                        <p>命令名稱[命令參數][命令對象]</p>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="44Basic">1.基本指令</h2>
+                                        <h3>獲取登入訊息</h3>
+                                        <p> w / who / last/ lastb</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看自己使用Shell</h3>
+                                        <p>ps</p>
+                                        <P>Shell稱為殼或殼程式，用戶和操作系統交流的翻譯，等於說是負責人與計算機之間的交流</P>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看命令說明和位置</h3>
+                                        <p>whatis / which / whereis</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_3.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>清除螢幕上顯示的內容</h3>
+                                        <p>clear</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_4.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看幫助文檔</h3>
+                                        <p>man / info / --help / apropos</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_5.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看系統與主機名</h3>
+                                        <p>uname / hostname</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_6.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>時間和日期</h3>
+                                        <p>date / cal</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_7.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>重啟和關機</h3>
+                                        <p>reboot / shutdown</p>
+                                        <div>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>退出登入</h3>
+                                        <p>exit / logout</p>
+                                        <div>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看歷史命令</h3>
+                                        <p>history</p>
+                                        <p>可以用history -c清除歷史命令</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux1_10.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+
+                                        <hr class="major" />
+    
+                                        <h2 id="44Useful">2.實用</h2>
+                                        <h2></h2>
+                                        <h3>創建/刪除空目錄</h3>
+                                        <p>mkdir / rmdir</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h3>創建/刪除文件</h3>
+                                        <p>touch / rm</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_2.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>切換/查看當前目錄</h3>
+                                        <p>cd / pwd</p>
+                                        <p>cd .. 用來返回上一層</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_3.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看目錄內容</h3>
+                                        <p>ls</p>
+                                        <p>-l 長格式查看文件和目錄</p>
+                                        <p>-a 顯示用.開頭的目錄和文件</p>
+                                        <p>-d 只列目錄</p>
+                                        <p>-S/-t 按大小/時間排序</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_4.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看文件內容</h3>
+                                        <p>cat / tac / head / tail / more / less / rev / od</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux2_3.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>拷貝/移動文件</h3>
+                                        <p>cp / mv</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_6.jpg" alt="" />
+                                            </span> 
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>文件重新命名</h3>
+                                        <p>rename</p>
+                                        <p>mv 不只有移動檔案而且可以重新命名</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_7.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查找文件和查找內容</h3>
+                                        <p> find / grep</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux2_8.jpg" alt="" />
+                                            </span> 
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>創造/查找連結</h3>
+                                        <p> ln / readlink</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux2_8.jpg" alt="" />
+                                            </span>  -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>其他工具</h3>
+                                        <p> sort 對內容排序</p>
+                                        <p> uniq 去掉相鄰重複內容</p>
+                                        <p> tr  替換指定內容為新內容</p>
+                                        <p> cut / paste 剪下/黏貼內容</p>
+                                        <p> split  拆分文件</p>
+                                        <p> file  判斷文件類型</p>
+                                        <p> wc  統計文件行數,單詞數,字節數</p>
+                                        <p> iconv  編碼轉換</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux2_8.jpg" alt="" />
+                                            </span>  -->
+                                        </div>
+                                        
+                                        <hr class="major" />
+    
+                                        <h2 id="44Basic">3.用戶管理</h2>
+                                        <h3>創建/刪除用戶</h3>
+                                        <p>useradd / userdel</p>
+                                        <p>d 創建用戶時指定用戶主目錄</p>
+                                        <p>d 創建用戶時指定所屬用戶組</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux5_1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>創建/刪除用戶組</h3>
+                                        <p>groupadd / groupdel</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux5_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>切換用戶</h3>
+                                        <p>su</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux5_3.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>修改密碼</h3>
+                                        <p>passwd</p>
+                                        <p>-d 清除用戶密碼</p>
+                                        <p>-e 設置用戶密碼立即過期,登入會要求修改密碼</p>
+                                        <p>-i 設置用戶密碼多少天過期,之後會禁用該用戶</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux5_4.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>查看/修改密碼有效期限</h3>
+                                        <p>chage</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux5_4.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>以管理員執行命令</h3>
+                                        <p>sudo</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux5_4.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>顯示用戶和用戶組訊息</h3>
+                                        <p>id</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux5_7.jpg" alt="" />
+                                            </span>
+                                        </div>
+                                        
+                                        <h2></h2>
+                                        <h3>給其他用戶發訊息</h3>
+                                        <p>write / wall</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux5_7.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <hr class="major" />
+                                        <h2 id="44Basic">4.磁碟管理</h2>
+                                        <h3>列出文件系統磁碟使用狀況</h3>
+                                        <h6>執行磁碟命令前先確定是否要這樣做，如果不清楚用法最好不要隨便使用</h6>
+                                        <p>df</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>磁碟分區表操作</h3>
+                                        <p>fdisk</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>磁碟分區工具</h3>
+                                        <p>parted</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>格式化文件系統</h3>
+                                        <p>mkfs</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>文件系統檢查</h3>
+                                        <p>fsck</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>轉換/拷貝文件</h3>
+                                        <p>dd</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+                                        
+                                        <h2></h2>
+                                        <h3>掛載/卸載</h3>
+                                        <p>mount / umount</p>
+                                        <div>
+                                            <!-- <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span> -->
+                                        </div>
+
+                                        <h2></h2>
+                                        <h3>創建/激活/關閉/交換分區</h3>
+                                        <p>mkswap / swapon / swapoff</p>
+                                        <div>
+                                            
+                                        </div>
+
+                                        <hr class="major" />
+    
+                                        <h2 id="44Basic">4.磁碟管理</h2>
+                                        <h3>列出文件系統磁碟使用狀況</h3>
+                                        <p>df</p>
+                                        <div>
+                                            <span class="image object">
+                                                <img src="images/44_Linux7_1.jpg" alt="" />
+                                            </span>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+                                        <hr class="major" />
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Java 100天</span>
+									<ul>
+                                        <li><a href="7Week.html">第七週 Linux 指令</a></li>
+                                        <ul>
+                                            <li><a href="#44Basic">基本</a></li>
+                                            <li><a href="#44Useful">實用</a></li>
+                                            <li><a href="#93application">application 配置</a></li>
+                                        </ul>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
