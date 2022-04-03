@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="../assets/css/main.css" />
   <script type="text/javascript">
   </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
 </head>
 <body class="is-preload">
 
@@ -17,28 +23,177 @@
             <div id="main">
                 <div class="inner">
                         <header id="header">
-                                <a href="../index.html" class="icon solid fa-home"><span class="label">Medium</span></a>
                         </header>
 
                         <!-- Content -->
 						<section>
+
                             <header class="main">
-                                <h1>Jenkins</h1>
+                                <h1>Jenkins 環境建置 和 Hello World</h1>
                             </header>
 
-                            <hr class="major" />
-    
-                            <h2>第1天 環境建置 和 Jenkins 的 Hello World</h2>
-                            <p>1.前言<br />
-                                2. 安裝 WSL 2<br />
-                                3. Docker Desktop<br />
-                                4.安裝 Jenkins<br />
-                                5.Jenkins 的 Hello World<br />
-                            </p>
-                            <ul class="actions">
-                                <li><a href="1Day.html" class="button big">Learn More</a></li>
-                            </ul>
+                            <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
 
+                            <hr class="major" />
+
+                            <h2>前言</h2>
+                            <p>因為  CI/CD 包含的項目很多，個人覺得切分一個個小項目學習會來得有具體和目標</p>
+                            <p>如果主要是對Jenkins 學習，環境上可以用得簡單一些</p>
+                            <p>windows 環境下利用Docker Desktop 安裝 Jenkins 來學習</p>
+                            <hr class="major" />
+
+                            <h2>第一步 安裝 WSL 2</h2>
+                            <h3>1</h3>
+                            <p>使用系統管理員權限開啟 PowerShell</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <p>開始功能表搜尋PowerShell 和 右鍵選以系統管理員身分執行</p>
+                            
+                            <h3>2</h3>
+                            <p>使用 PowerShell 輸入指令</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p href="https://docs.microsoft.com/zh-tw/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package">官方連結</p>
+                            <p>如果是比較舊的版本</p>
+                            <p>按照網頁依序輸入</p>
+                            <p>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</p>
+                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
+                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
+                            <p>wsl --set-default-version 2</p>
+                            <hr class="major" />
+
+                            <h2>第二步 安裝 Docker Desktop</h2>
+
+                            <h3>1</h3>
+                            <p>Google 搜尋Docker</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker1.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>點選 Get Started</p>
+
+                            <p>選擇 windows 環境下安裝下載後執行</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker3.JPG" alt="" />
+                                </span>
+                            </div>
+
+
+                            <h3>2</h3>
+                            <p>安裝完成後可以檢查輸入指令 docker --version</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker4.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <hr class="major" />
+                            <h2>第三步 安裝Jenkins</h2>
+                            <h3>1</h3>
+                            <p>使用 PowerShell 輸入指令 </p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>按照網頁依序輸入</p>
+                            <p>docker pull jenkins/Jenkins</p>
+
+                            <h3>2</h3>
+                            <p>docker images 確認 有jenkins</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins2.jpg" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>3</h3>
+                            <p>輸入 docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins</p>
+                            <p>留意以下字串是密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins3.jpg" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>4</h3>
+                            <p>打開瀏覽器輸入http://localhost:8080/ 會看到這畫面</p>
+                            <p>輸入 剛才的密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins4.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>點選左邊社群推薦安裝</p>
+                            <p>設定帳號和密碼</p>
+                            
+                            <h3>5</h3>
+                            <p>重啟登入輸入帳號和密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins5.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>6</h3>
+                            <p>起始畫面</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins6.JPG" alt="" />
+                                </span>
+                            </div> 
+
+                            <hr class="major" />
+
+                            <h2>第四步 Jenkins Hello World</h2>
+                            <h3>1</h3>
+                            <p>新增作業>創建第一個pipeline</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline1.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>2 輸入以下內容</h3>
+                            <p>輸入以下內容</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <div>
+                              
+<pre style="color:#d1d1d1;background:#000000;">pipeline<span style="color:#b060b0; ">{</span>
+    agent any
+ 
+    stages<span style="color:#b060b0; ">{</span>
+       stage<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">'Build'</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+          steps<span style="color:#b060b0; ">{</span>
+             echo <span style="color:#00c4c4; ">'Hello world'</span>
+          <span style="color:#b060b0; ">}</span>
+       <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+ <span style="color:#b060b0; ">}</span>
+ </pre>                        
+                            </div> 
+
+
+                            <h3>3</h3>
+                            <p>察看結果</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline4.JPG" alt="" />
+                                </span>
+                            </div> 
                         </section>
                 </div>
             </div>
@@ -61,27 +216,13 @@
 								<li>
 									<span class="opener">Jenkins</span>
 									<ul>
-                                        <li><a href="1Day.html">第1天 環境建置 和 Jenkins 的 Hello World</a></li>
-                                        <!-- <li><a href="1Day.html">第1天 環境建置 和 Jenkins 的 Hello World</a></li> -->
+                                      <li><a href="1Day.html">第1天 環境建置 和 Jenkins 的 Hello World</a></li>
+                                      <!-- <li><a href="1Day.html">第1天 環境建置 和 Jenkins 的 Hello World</a></li> -->
 									</ul>
 								</li>
 								<li><a href="../index.html">Homepage</a></li>
 							</ul>
 						</nav>
-
-					<!-- Section -->
-						<section>
-							<!-- <header class="major">
-								<h2>Get in touch</h2>
-							</header>
-							<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-							<ul class="contact">
-								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-								<li class="icon solid fa-phone">(000) 000-0000</li>
-								<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-								Nashville, TN 00000-0000</li>
-							</ul> -->
-						</section>
 				</div>
 			</div>
    </div>
