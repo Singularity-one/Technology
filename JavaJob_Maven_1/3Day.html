@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+
+                            <header class="main">
+                                <h1>第3天</h1>
+                                <h1>Maven 常用指令</h1>
+                            </header>
+
+                            <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+                            <hr class="major" />
+    
+                            <h2 id="44Linux14">1.常用命令參數</h2>
+
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>命令參數</th>
+                                            <th>功能說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>mvn -v or --version</td>
+                                            <td>顯示版本訊息</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -V or --show-version</td>
+                                            <td>顯示版本訊息,後面可以繼續執行其他步驟</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -h or --help </td>
+                                            <td>顯示 相關 幫助訊息</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -e or --errors</td>
+                                            <td>設定 Maven 日誌級別 當 error發生時 訊息印出</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -X or --debug</td>
+                                            <td>設定 Maven 日誌級別 當 debug時 訊息印出</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -q or --quiet</td>
+                                            <td>設定 Maven 日誌級別 僅錯誤訊息印出</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -Pxxx</td>
+                                            <td>生命週期過程中會執行 該id 的 Profile,如果多個可以用逗號隔開</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>mvn -Dxxx=yyy</td>
+                                            <td>指定 java屬性</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>mvn -o or --offline</td>
+                                            <td>執行offline模式不連上網路更新依賴</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -N or --non-recursive</td>
+                                            <td>只在當前項目執行,不構建子模組</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>mvn -pl or --module_name</td>
+                                            <td>複製命名剪切的內容</td>
+                                        </tr> -->
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Maven</span>
+									<ul>
+                                      <!-- <li><a href="1Day.html">第1天 環境建置 和 Maven 建立第一個maven專案</a></li>
+                                      <li><a href="2Day.html">第2天 Maven 生命週期</a></li> -->
+                                      <li><a href="3Day.html">第3天 Maven 常用指令</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

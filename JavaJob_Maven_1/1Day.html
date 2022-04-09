@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script type="text/javascript">
+  </script>
+
+    <style type="text/css">
+    p {
+        color:black;
+    }
+    </style>
+</head>
+<body class="is-preload">
+
+   <!-- Wrapper -->
+   <div id="wrapper">
+
+        <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                        <header id="header">
+                        </header>
+
+                        <!-- Content -->
+						<section>
+
+                            <header class="main">
+                                <h1>第1天</h1>
+                                <h1>Maven環境建置</h1>
+                                <h1>建立第一個maven專案</h1>
+                            </header>
+
+                            <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+                            <hr class="major" />
+
+                            <h2>前言</h2>
+                            <p>主要參考 Maven in 5 Minutes</p>
+                            <p>希望在工作上對於使用的Maven 可以多了解一些</p>
+                            <hr class="major" />
+
+                            <h2>第一步 Maven環境建置</h2>
+                            <h3>1</h3>
+                            <p>在Maven 官網 下載 Maven</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <p>開始功能表搜尋PowerShell 和 右鍵選以系統管理員身分執行</p>
+                            
+                            <h3>2</h3>
+                            <p>使用 PowerShell 輸入指令</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p href="https://docs.microsoft.com/zh-tw/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package">官方連結</p>
+                            <p>如果是比較舊的版本</p>
+                            <p>按照網頁依序輸入</p>
+                            <p>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</p>
+                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
+                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
+                            <p>wsl --set-default-version 2</p>
+                            <hr class="major" />
+
+                            <h2>第二步 安裝 Docker Desktop</h2>
+
+                            <h3>1</h3>
+                            <p>Google 搜尋Docker</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker1.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>點選 Get Started</p>
+
+                            <p>選擇 windows 環境下安裝下載後執行</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker3.JPG" alt="" />
+                                </span>
+                            </div>
+
+
+                            <h3>2</h3>
+                            <p>安裝完成後可以檢查輸入指令 docker --version</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Docker4.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <hr class="major" />
+                            <h2>第三步 安裝Jenkins</h2>
+                            <h3>1</h3>
+                            <p>使用 PowerShell 輸入指令 </p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>按照網頁依序輸入</p>
+                            <p>docker pull jenkins/Jenkins</p>
+
+                            <h3>2</h3>
+                            <p>docker images 確認 有jenkins</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins2.jpg" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>3</h3>
+                            <p>輸入 docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins</p>
+                            <p>留意以下字串是密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins3.jpg" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>4</h3>
+                            <p>打開瀏覽器輸入http://localhost:8080/ 會看到這畫面</p>
+                            <p>輸入 剛才的密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins4.JPG" alt="" />
+                                </span>
+                            </div>
+                            <p>點選左邊社群推薦安裝</p>
+                            <p>設定帳號和密碼</p>
+                            
+                            <h3>5</h3>
+                            <p>重啟登入輸入帳號和密碼</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins5.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>6</h3>
+                            <p>起始畫面</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_Jenkins6.JPG" alt="" />
+                                </span>
+                            </div> 
+
+                            <hr class="major" />
+
+                            <h2>第四步 Jenkins Hello World</h2>
+                            <h3>1</h3>
+                            <p>新增作業>創建第一個pipeline</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline1.JPG" alt="" />
+                                </span>
+                            </div>
+
+                            <h3>2 輸入以下內容</h3>
+                            <p>輸入以下內容</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline2.JPG" alt="" />
+                                </span>
+                            </div>
+                            <div>
+                              
+<pre style="color:#d1d1d1;background:#000000;">pipeline<span style="color:#b060b0; ">{</span>
+    agent any
+ 
+    stages<span style="color:#b060b0; ">{</span>
+       stage<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">'Build'</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
+          steps<span style="color:#b060b0; ">{</span>
+             echo <span style="color:#00c4c4; ">'Hello world'</span>
+          <span style="color:#b060b0; ">}</span>
+       <span style="color:#b060b0; ">}</span>
+    <span style="color:#b060b0; ">}</span>
+ <span style="color:#b060b0; ">}</span>
+ </pre>                        
+                            </div> 
+
+
+                            <h3>3</h3>
+                            <p>察看結果</p>
+                            <div>
+                                <span class="image object">
+                                    <img src="images/Jenkins1Day_pipline4.JPG" alt="" />
+                                </span>
+                            </div> 
+                        </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- Search -->
+						<section id="search" class="alt">
+						</section>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Homepage</a></li>
+								<li>
+									<span class="opener">Maven</span>
+									<ul>
+                                      <li><a href="1Day.html">第1天 環境建置 和 Maven 建立第一個maven專案</a></li>
+									</ul>
+								</li>
+								<li><a href="../index.html">Homepage</a></li>
+							</ul>
+						</nav>
+				</div>
+			</div>
+   </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
