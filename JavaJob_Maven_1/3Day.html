@@ -49,50 +49,133 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>mvn -v or --version</td>
-                                            <td>顯示版本訊息</td>
+                                            <td>mvn -am or --also-make</td>
+                                            <td>如果指定了項目列表，也構建列表所需的項目</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -V or --show-version</td>
-                                            <td>顯示版本訊息,後面可以繼續執行其他步驟</td>
+                                            <td>mvn -amd or --also-make-dependents</td>
+                                            <td>如果指定了項目列表，也構建依賴於列表中項目</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -h or --help </td>
-                                            <td>顯示 相關 幫助訊息</td>
+                                            <td>mvn -B or --batch-mode</td>
+                                            <td>用非交互(批次)模式運行</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -C or --strict-checksums</td>
+                                            <td>如果檢驗和不匹配，則構建失敗</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -c or --lax-checksums</td>
+                                            <td>如果檢驗和不匹配，則發出警告</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>mvn -cpu or--check-plugin-updates</td>
+                                            <td>無效，兼容用</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>mvn -Dxxx=yyy</td>
+                                            <td>指定 java屬性</td>
                                         </tr>
                                         <tr>
                                             <td>mvn -e or --errors</td>
                                             <td>設定 Maven 日誌級別 當 error發生時 訊息印出</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -X or --debug</td>
-                                            <td>設定 Maven 日誌級別 當 debug時 訊息印出</td>
+                                            <td>mvn -emp or --encrypt-master-password</td>
+                                            <td>加密安全密碼</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -q or --quiet</td>
-                                            <td>設定 Maven 日誌級別 僅錯誤訊息印出</td>
+                                            <td>mvn -ep or --encrypt-password <arg></td>
+                                            <td>加密服務器密碼</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -Pxxx</td>
-                                            <td>生命週期過程中會執行 該id 的 Profile,如果多個可以用逗號隔開</td>
+                                            <td>mvn -f or --file</td>
+                                            <td>強制使用POM文件</td>
                                         </tr>
                                         <!-- <tr>
-                                            <td>mvn -Dxxx=yyy</td>
-                                            <td>指定 java屬性</td>
+                                            <td>mvn -fae or --fail-at-end</td>
+                                            <td></td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>mvn -ff or --fail-fast</td>
+                                            <td>建構第一次失敗時停止</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -fn or --fail-never</td>
+                                            <td>永遠不要建構失敗，不論結果</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -gs or --global-settings <arg></td>
+                                            <td>全域設置文件的備用路徑</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -h or --help </td>
+                                            <td>顯示 相關 幫助訊息</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -l,--log-file</td>
+                                            <td>日誌文件到構建所輸出的位置</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>-llr,--legacy-local-repository</td>
+                                            <td></td>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <td>mvn Dmaven.legacyLocalRepo=true</td>
+                                            <td></td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>mvn -N or --non-recursive</td>
+                                            <td>只在當前項目執行,不構建子模組</td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>mvn -npr or --no-plugin-registry</td>
+                                            <td>無效，兼容用</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -npu or --no-plugin-updates</td>
+                                            <td>無效，兼容用</td>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <td>mvn -nsu,--no-snapshot-updates</td>
+                                            <td>禁止快取更新</td>
                                         </tr> -->
                                         <tr>
                                             <td>mvn -o or --offline</td>
                                             <td>執行offline模式不連上網路更新依賴</td>
                                         </tr>
                                         <tr>
-                                            <td>mvn -N or --non-recursive</td>
-                                            <td>只在當前項目執行,不構建子模組</td>
+                                            <td>mvn -Pxxx</td>
+                                            <td>生命週期過程中會執行 該id 的 Profile,如果多個可以用逗號隔開</td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td>mvn -pl or --projects</td>
+                                            <td></td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>mvn -q or --quiet</td>
+                                            <td>設定 Maven 日誌級別 僅錯誤訊息印出</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -rf or --resume-from</td>
+                                            <td>從指定項目回復</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -s or --settings <arg></td>
+                                            <td>設置文件的備用路徑</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -T or --threads</td>
+                                            <td>線程數</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -V or --show-version</td>
+                                            <td>顯示版本訊息,後面可以繼續執行其他步驟</td>
                                         </tr>
                                         <!-- <tr>
                                             <td>mvn -pl or --module_name</td>
                                             <td>複製命名剪切的內容</td>
                                         </tr> -->
-                                       
                                     </tbody>
                                 </table>
                             </div>
