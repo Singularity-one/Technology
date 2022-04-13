@@ -37,31 +37,38 @@
 
                             <hr class="major" />
 
-                            <h2>Maven 三個基本 專案建置生命週期</h2>
-                            <p>clean</p>
-                            <p>default</p>
+                            <h2>Maven 生命週期 是由一系列phase所組成</h2>
+                            <p>validate</p>
+                            <p>initialize</p>
+                            <p>generate-sources</p>
+                            <p>process-sources</p>
+                            <p>compile</p>
+                            <p>process-classes</p>
+                            <p>generate-test-sources</p>
+                            <p>process-test-sources</p>
+                            <p>initialize</p>
                             <p>site</p>
 
                             <div class="table-wrapper">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>階段</th>
+                                            <th>lifecycle 中 phases階段</th>
                                             <th>功能說明</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>validate</td>
-                                            <td></td>
+                                            <td>驗證專案的資訊是否正確</td>
                                         </tr>
                                         <tr>
                                             <td>compile</td>
-                                            <td></td>
+                                            <td>編譯原始碼</td>
                                         </tr>
                                         <tr>
                                             <td>test</td>
-                                            <td></td>
+                                            <td>對編譯的原始碼單元測試</td>
                                         </tr>
                                         <tr>
                                             <td>package</td>
