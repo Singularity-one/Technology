@@ -49,11 +49,40 @@
                             <p>initialize</p>
                             <p>site</p>
 
+                            <hr class="major" />
+
                             <div class="table-wrapper">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>lifecycle 中 phases階段</th>
+                                            <th>Clean lifecycle 中 phases階段</th>
+                                            <th>功能說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>pre-clean</td>
+                                            <td>在執行 clean 前執行所需要流程</td>
+                                        </tr>
+                                        <tr>
+                                            <td>clean</td>
+                                            <td>編譯原始碼</td>
+                                        </tr>
+                                        <tr>
+                                            <td>post-clean</td>
+                                            <td>在執行 clean 後執行所需要流程</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr class="major" />
+
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Default lifecycle 中 phases階段</th>
                                             <th>功能說明</th>
                                         </tr>
                                     </thead>
@@ -72,19 +101,19 @@
                                         </tr>
                                         <tr>
                                             <td>package</td>
-                                            <td></td>
+                                            <td>將編譯的程式碼打包成指定格式</td>
                                         </tr>
                                         <tr>
                                             <td>verify</td>
-                                            <td></td>
+                                            <td>進行整合測試</td>
                                         </tr>
                                         <tr>
                                             <td>install</td>
-                                            <td></td>
+                                            <td>將打包好的檔案存入本地</td>
                                         </tr>
                                         <tr>
                                             <td>deploy</td>
-                                            <td></td>
+                                            <td>將打包好的檔案上傳至遠端</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -92,7 +121,38 @@
 
                             <hr class="major" />
 
-                            <h2>第一步 Maven環境建置</h2>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Site  lifecycle 中 phases階段</th>
+                                            <th>功能說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>pre-site</td>
+                                            <td>在執行 site 前執行所需要流程</td>
+                                        </tr>
+                                        <tr>
+                                            <td>site</td>
+                                            <td>生成專案文件站</td>
+                                        </tr>
+                                        <tr>
+                                            <td>post-site</td>
+                                            <td>在執行 site 後執行所需要流程</td>
+                                        </tr>
+                                        <tr>
+                                            <td>site-deploy</td>
+                                            <td>將生成的專案文件站 部屬到指定伺服器</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr class="major" />
+
+                            <!-- <h2>第一步 Maven環境建置</h2>
                             <h3>1</h3>
                             <p>在Maven 官網 下載 Maven</p>
                             <div>
@@ -220,21 +280,6 @@
                                     <img src="images/Jenkins1Day_pipline2.JPG" alt="" />
                                 </span>
                             </div>
-                            <div>
-                              
-<pre style="color:#d1d1d1;background:#000000;">pipeline<span style="color:#b060b0; ">{</span>
-    agent any
- 
-    stages<span style="color:#b060b0; ">{</span>
-       stage<span style="color:#d2cd86; ">(</span><span style="color:#00c4c4; ">'Build'</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">{</span>
-          steps<span style="color:#b060b0; ">{</span>
-             echo <span style="color:#00c4c4; ">'Hello world'</span>
-          <span style="color:#b060b0; ">}</span>
-       <span style="color:#b060b0; ">}</span>
-    <span style="color:#b060b0; ">}</span>
- <span style="color:#b060b0; ">}</span>
- </pre>                        
-                            </div> 
 
 
                             <h3>3</h3>
@@ -243,7 +288,7 @@
                                 <span class="image object">
                                     <img src="images/Jenkins1Day_pipline4.JPG" alt="" />
                                 </span>
-                            </div> 
+                            </div>  -->
                         </section>
                 </div>
             </div>
