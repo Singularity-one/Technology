@@ -30,27 +30,40 @@
 
                             <header class="main">
                                 <h1>第2天</h1>
-                                <h1>Maven 專案建置生命週期</h1>
+                                <h1>Maven 生命週期</h1>
                             </header>
 
                             <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
 
                             <hr class="major" />
 
-                            <h2>Maven 生命週期 是由一系列phase所組成</h2>
-                            <p>validate</p>
-                            <p>initialize</p>
-                            <p>generate-sources</p>
-                            <p>process-sources</p>
-                            <p>compile</p>
-                            <p>process-classes</p>
-                            <p>generate-test-sources</p>
-                            <p>process-test-sources</p>
-                            <p>initialize</p>
-                            <p>site</p>
+                            <h2>Maven 生命週期</h2>
+                            <p>Maven 有三套獨立的生命週期</p>
+                            <h3>Clean lifecycle</h3>
+                            <h3>Default lifecycle</h3>
+                            <h3>Site  lifecycle</h3>
+
+                            <h3>可以用設計模式中模板方法來想像</h3>
+                            <div>
+                                <pre style="color:#d1d1d1;background:#000000;"><span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#e66170; font-weight:bold; ">class</span> Clean <span style="color:#b060b0; ">{</span>
+	
+                                    <span style="color:#e66170; font-weight:bold; ">public</span> <span style="color:#bb7977; ">void</span> doclean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span> <span style="color:#b060b0; ">{</span>
+                                        pre_clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                        clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                        post_clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                
+                                    <span style="color:#b060b0; ">}</span>
+                                    
+                                    <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#bb7977; ">void</span> pre_clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                    <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#bb7977; ">void</span> clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                    <span style="color:#e66170; font-weight:bold; ">protected</span> <span style="color:#e66170; font-weight:bold; ">abstract</span> <span style="color:#bb7977; ">void</span> post_clean<span style="color:#d2cd86; ">(</span><span style="color:#d2cd86; ">)</span><span style="color:#b060b0; ">;</span>
+                                    
+                                <span style="color:#b060b0; ">}</span>
+                                </pre>                                                             
+                            </div>
 
                             <hr class="major" />
-
+                            <h2>Maven 生命週期 內步驟</h2>
                             <div class="table-wrapper">
                                 <table>
                                     <thead>
@@ -92,16 +105,80 @@
                                             <td>驗證專案的資訊是否正確</td>
                                         </tr>
                                         <tr>
+                                            <td>initialize</td>
+                                            <td>初始化</td>
+                                        </tr>
+                                        <tr>
+                                            <td>generate-sources</td>
+                                            <td>生成代碼</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-sources</td>
+                                            <td>過濾代碼，是對src/main/resources目錄內的內容進行變量替換，複製到主classpath目錄中</td>
+                                        </tr>
+                                        <tr>
+                                            <td>generate-resources</td>
+                                            <td>生成資料文件</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-resources</td>
+                                            <td>過濾資料文件</td>
+                                        </tr>
+                                        <tr>
                                             <td>compile</td>
-                                            <td>編譯原始碼</td>
+                                            <td>編譯原始碼，是對src/main/java目錄內的Java，複製到主classpath目錄中</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-classes</td>
+                                            <td>處理 class</td>
+                                        </tr>
+                                        <tr>
+                                            <td>generate-test-sources</td>
+                                            <td>生成 測試 代碼</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-test-sources</td>
+                                            <td>過濾 測試 代碼，是對src/test/resources目錄內的內容進行變量替換，複製到主classpath目錄中</td>
+                                        </tr>
+                                        <tr>
+                                            <td>generate-test-resources</td>
+                                            <td>生成 測試 代碼文件</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-test-resources</td>
+                                            <td>複製 測試 代碼至目標目錄</td>
+                                        </tr>
+                                        <tr>
+                                            <td>test-compile</td>
+                                            <td>編譯 測試 代碼，是對src/test/java目錄內的Java，複製到主classpath目錄中</td>
+                                        </tr>
+                                        <tr>
+                                            <td>process-test-classes</td>
+                                            <td>處理 測試 代碼文件</td>
                                         </tr>
                                         <tr>
                                             <td>test</td>
-                                            <td>對編譯的原始碼單元測試</td>
+                                            <td>對編譯的原始碼單元測試，使用單元測試框架，並不會打包和部屬</td>
+                                        </tr>
+                                        <tr>
+                                            <td>prepare-package</td>
+                                            <td>準備打包</td>
                                         </tr>
                                         <tr>
                                             <td>package</td>
                                             <td>將編譯的程式碼打包成指定格式</td>
+                                        </tr>
+                                        <tr>
+                                            <td>pre-integration-test</td>
+                                            <td>集成測試前</td>
+                                        </tr>
+                                        <tr>
+                                            <td>integration-test</td>
+                                            <td>集成測試</td>
+                                        </tr>
+                                        <tr>
+                                            <td>post-integration-test</td>
+                                            <td>集成測試後</td>
                                         </tr>
                                         <tr>
                                             <td>verify</td>
@@ -109,7 +186,7 @@
                                         </tr>
                                         <tr>
                                             <td>install</td>
-                                            <td>將打包好的檔案存入本地</td>
+                                            <td>將打包好的檔案存入本地，意指包裝到Maven本地倉庫，供本地其他Maven項目使用</td>
                                         </tr>
                                         <tr>
                                             <td>deploy</td>
@@ -152,143 +229,20 @@
 
                             <hr class="major" />
 
-                            <!-- <h2>第一步 Maven環境建置</h2>
-                            <h3>1</h3>
-                            <p>在Maven 官網 下載 Maven</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_PowerShell.JPG" alt="" />
-                                </span>
-                            </div>
+                            <h3>命令和生命週期</h3>
+                            <h4>mvn clean</h4>
+                            <p>該命令調用Clean lifecycle，執行Clean lifecycle中pre-clean 到 clean階段</p>
 
-                            <p>開始功能表搜尋PowerShell 和 右鍵選以系統管理員身分執行</p>
-                            
-                            <h3>2</h3>
-                            <p>使用 PowerShell 輸入指令</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
-                                </span>
-                            </div>
-                            <p href="https://docs.microsoft.com/zh-tw/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package">官方連結</p>
-                            <p>如果是比較舊的版本</p>
-                            <p>按照網頁依序輸入</p>
-                            <p>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</p>
-                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
-                            <p>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</p>
-                            <p>wsl --set-default-version 2</p>
-                            <hr class="major" />
+                            <h4>mvn test</h4>
+                            <p>該命令調用Default lifecycle，執行Default lifecycle中validate 到 test階段</p>
 
-                            <h2>第二步 安裝 Docker Desktop</h2>
+                            <h4>mvn clean install</h4>
+                            <p>該命令調用Clean lifecycle和Default lifecycle，執行Clean lifecycle中pre-clean 到 clean階段，和執行Default lifecycle中validate 到 install階段</p>
 
-                            <h3>1</h3>
-                            <p>Google 搜尋Docker</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Docker1.JPG" alt="" />
-                                </span>
-                            </div>
-                            <p>點選 Get Started</p>
-
-                            <p>選擇 windows 環境下安裝下載後執行</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Docker3.JPG" alt="" />
-                                </span>
-                            </div>
-
-
-                            <h3>2</h3>
-                            <p>安裝完成後可以檢查輸入指令 docker --version</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Docker4.JPG" alt="" />
-                                </span>
-                            </div>
-
-                            <hr class="major" />
-                            <h2>第三步 安裝Jenkins</h2>
-                            <h3>1</h3>
-                            <p>使用 PowerShell 輸入指令 </p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_PowerShell_2.JPG" alt="" />
-                                </span>
-                            </div>
-                            <p>按照網頁依序輸入</p>
-                            <p>docker pull jenkins/Jenkins</p>
-
-                            <h3>2</h3>
-                            <p>docker images 確認 有jenkins</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Jenkins2.jpg" alt="" />
-                                </span>
-                            </div>
-
-                            <h3>3</h3>
-                            <p>輸入 docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins</p>
-                            <p>留意以下字串是密碼</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Jenkins3.jpg" alt="" />
-                                </span>
-                            </div>
-
-                            <h3>4</h3>
-                            <p>打開瀏覽器輸入http://localhost:8080/ 會看到這畫面</p>
-                            <p>輸入 剛才的密碼</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Jenkins4.JPG" alt="" />
-                                </span>
-                            </div>
-                            <p>點選左邊社群推薦安裝</p>
-                            <p>設定帳號和密碼</p>
-                            
-                            <h3>5</h3>
-                            <p>重啟登入輸入帳號和密碼</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Jenkins5.JPG" alt="" />
-                                </span>
-                            </div>
-
-                            <h3>6</h3>
-                            <p>起始畫面</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_Jenkins6.JPG" alt="" />
-                                </span>
-                            </div> 
-
-                            <hr class="major" />
-
-                            <h2>第四步 Jenkins Hello World</h2>
-                            <h3>1</h3>
-                            <p>新增作業>創建第一個pipeline</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_pipline1.JPG" alt="" />
-                                </span>
-                            </div>
-
-                            <h3>2 輸入以下內容</h3>
-                            <p>輸入以下內容</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_pipline2.JPG" alt="" />
-                                </span>
-                            </div>
-
-
-                            <h3>3</h3>
-                            <p>察看結果</p>
-                            <div>
-                                <span class="image object">
-                                    <img src="images/Jenkins1Day_pipline4.JPG" alt="" />
-                                </span>
-                            </div>  -->
+                            <h4>mvn clean depoly site-deploy</h4>
+                            <p>該命令調用Clean lifecycle，執行Clean lifecycle中pre-clean 到 clean階段</p>
+                            <p>該命令調用Default lifecycle，執行Default lifecycle中validate 到 depoly階段</p>
+                            <p>該命令調用Site lifecycle，執行Site lifecycle中pre-site 到 site-deploy階段</p>
                         </section>
                 </div>
             </div>
@@ -311,7 +265,7 @@
 								<li>
 									<span class="opener">Maven</span>
 									<ul>
-                                      <!-- <li><a href="1Day.html">第1天 環境建置 和 Maven 建立第一個maven專案</a></li> -->
+                                      <li><a href="2Day.html">第2天 Maven 生命週期</a></li>
                                       <li><a href="3Day.html">第3天 Maven 常用指令</a></li>
 									</ul>
 								</li>

@@ -200,6 +200,117 @@
                                 </table>
                             </div>
 
+                            <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+                            <hr class="major" />
+
+                            <h2 id="44Linux14">2.常用命令</h2>
+
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>命令</th>
+                                            <th>功能說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>mvn -Dmaven.tomcat.port=8080</td>
+                                            <td>指定 port</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -DgroupId=packageName</td>
+                                            <td>指定 group</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -DartifactId=projectName</td>
+                                            <td>指定 artifact</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -DarchetypeArtifactId=maven-archetype-webapp</td>
+                                            <td>創建 web </td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -Dmaven.test.failure.ignore=true</td>
+                                            <td>忽略測試失敗</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn archetype:create</td>
+                                            <td>創建 maven </td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -Dtest package</td>
+                                            <td>指打包不測試</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn -e</td>
+                                            <td>顯示詳細錯誤訊息</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn validate</td>
+                                            <td>驗證 專案正確和所有必要資訊已經備妥</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn package <arg></td>
+                                            <td>打包</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn jar:jar</td>
+                                            <td>指打包jar</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn source:jar</td>
+                                            <td>生成 源碼 jar</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn compile</td>
+                                            <td>編譯 專案</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn test-compile</td>
+                                            <td>編譯 測試代碼</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn test<arg></td>
+                                            <td>運行 測試</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn verify</td>
+                                            <td>運行 檢查</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn clean</td>
+                                            <td>清理 maven</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn eclipse:clean</td>
+                                            <td>清理 eclipse 配置</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn install</td>
+                                            <td>將專案生成的jar  置本地倉庫(推薦應用 mvn clean install)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn:deploye</td>
+                                            <td>發布專案 至遠端倉庫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn dependency:tree</td>
+                                            <td>顯示 maven 的依賴樹</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn dependency:list</td>
+                                            <td>顯示 maven 的依賴列表</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mvn dependency:sources</td>
+                                            <td>下載 依賴包的源碼</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </section>
                 </div>
             </div>
@@ -222,8 +333,8 @@
 								<li>
 									<span class="opener">Maven</span>
 									<ul>
-                                      <!-- <li><a href="1Day.html">第1天 環境建置 和 Maven 建立第一個maven專案</a></li>
-                                      <li><a href="2Day.html">第2天 Maven 生命週期</a></li> -->
+                                      <!-- <li><a href="1Day.html">第1天 環境建置 和 Maven 建立第一個maven專案</a></li> -->
+                                      <li><a href="2Day.html">第2天 Maven 生命週期</a></li>
                                       <li><a href="3Day.html">第3天 Maven 常用指令</a></li>
 									</ul>
 								</li>
